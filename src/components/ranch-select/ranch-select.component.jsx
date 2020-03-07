@@ -1,49 +1,61 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import RANCHS_DATA from '../../pages/ranchs/ranchs';
+import RanchOptions from '../ranch-options/ranch-options.component';
 
-class RanchSelect extends React.Component {
-    constructor() {
-        super();
+import { selectAllRanches } from '../../redux/ranch/ranch.selectors';
 
-        this.state = {
-            ranch: RANCHS_DATA,
-            sectors: []
-           
-        }
-    }
+import './ranch-select.styles.scss';
 
-    handleRanchChange = (event) => {
+const RanchSelect = ({currentCompany, allRanches}) => {  
 
-        if(event.target.value !== '') {
-            const sectores = JSON.parse(event.target.value);
-            
-            this.setState({sectors: sectores});
-
-            console.log('sectors:', sectores);
-                        
+    return (
+    <div className='ranch-select'>
+        <h3>Ranch Select</h3>
+        <div className='select-header'>
+            <div className='header-block'>
+                <span>Ranch ID</span>
+            </div>
+            <div className='header-block'>
+                <span>Ranch Name</span>
+            </div>
+            <div className='header-block'>
+                <span>Crop</span>
+            </div>
+            <div className='header-block'>
+                <span>Sectors</span>
+            </div>
+             <div className='header-block'>
+                <span>Select Ranch</span>
+            </div>
+        </div>        
+        {
+            allRanches 
+            ? 
+            allRanches.map(ranch => <RanchOptions key={ranch.ranchId} ranch={ranch} />) 
+            : 
+            <h2>Please Add a Ranch</h2>
         }
         
-        
-    }
+    </div>
 
-    render() {
-        return(
-            <form className='ranch-select'>
-                <label>Ranch: </label>
-                <select value={this.state.ranch.name} onChange={this.handleRanchChange}>
-                    <option value=''>---</option>
-                    {
-                        this.state.ranch.map(({id, name, sectors, ...otherRanchProps}) => 
-                            <option key={id} {...otherRanchProps} value={JSON.stringify(sectors)}>{name}</option>
-                        )                   
-                    }    
-                </select>
-                
-                                
-            </form>
-        )
-    }
-}
+    /*
+    <form className='ranch-select'>
+        <label>Ranch: </label>
+        <select value={this.state.ranch.name} onChange={this.handleRanchChange}>
+            <option value=''>---</option>
+            {
+                this.state.ranch.map(({id, name, sectors, ...otherRanchProps}) => 
+                    <option key={id} {...otherRanchProps} value={JSON.stringify(sectors)}>{name}</option>
+                )                   
+            }    
+        </select>                                
+    </form>
+    */
+)}
 
-export default RanchSelect;
+const mapStateToProps = state => ({
+    allRanches: selectAllRanches(state)
+})
+
+export default connect(mapStateToProps)(RanchSelect);

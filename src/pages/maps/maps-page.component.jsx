@@ -2,7 +2,7 @@ import React from 'react';
 
 const Maps = () => (
     <div>
-        MAPS PAGE
+        <h1>MAPS PAGE</h1>
     </div>
 );
 

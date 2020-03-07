@@ -1,40 +1,32 @@
 import React from 'react';
 
-const Ranchs = () => {
-    return(
-        <div>
-            <h1>Ranch Setup</h1>
-            <form>
-                <div>
-                    <h3>Add Ranch</h3>
-                    <p>Name</p>
-                    <p>Ranch ID</p>
-                    <p>Ranch Code</p>
-                    <p>Crop</p>
-                    <p>Growing Area</p>
-                    <p>Location (GPS)</p>
-                    <p>Adress</p>
-                    <p>Sectors</p>
-                    <ul>
-                        <li>Sector Name</li>
-                        <li>Acreage (has)</li>
-                        <li>Variety</li>
-                        <li>Treatment</li>
-                        <li>Planting Date</li>
-                    </ul>
-                    <button>Add Ranch</button>
-                </div>
-                <div>
-                    <h3>Ranchs Added</h3>
-                    <p>Ranch</p>
-                    <p>Sectors</p>
-                    <p>Settings</p>
-                </div>
+import AddRanch from '../../components/add-ranch/add-ranch.component';
+import AddSectors from '../../components/add-sectors/add-sectors.component';
+import ActualRanch from '../../components/actual-ranch/actual-ranch.component';
+import RanchSelect from '../../components/ranch-select/ranch-select.component';
 
-            </form>
+class Ranchs extends React.Component {
+   
+    render() {
+        return(
+            <div>
+                <h1>Ranch Setup</h1>                
+                <div>
+                    <ActualRanch />                   
+                    
+                    <RanchSelect />
+                    <br />
+                    <span> Ranch | </span>
+                    <span> Sectors | </span>
+                    <span> Settings </span>            
+                </div>
+                <AddRanch />
+                <AddSectors />                 
+            </div>
+        )
+    }
+}   
+    
 
-        </div>
-    )
-}
 
 export default Ranchs;

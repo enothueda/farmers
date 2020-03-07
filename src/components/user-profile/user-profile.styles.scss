@@ -1,0 +1,24 @@
+.user-profile {
+
+		.user-info {
+			display: flex;
+			justify-content: center;
+			flex-direction: row;
+			height: 250px;
+			width: 100%;
+
+			.profile-photo {
+				width: 200px;
+				height: 200px;
+				margin: 25px;
+				border-radius: 50%;
+			}
+
+			.profile-data {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				margin: 0 10px;
+			}
+		}		
+	}

@@ -1,0 +1,20 @@
+.ranch-options {
+	width: 100%;
+    display: flex;
+    min-height: 10px;    
+    padding: 5px 0;
+    font-size: 20px;
+    align-items: center;
+
+    .option {
+    	width: 20%;
+
+    	&:last-child {
+    		
+    	}
+    }
+
+    &:last-child {
+		border-bottom: 1px solid darkgrey;
+	}
+}

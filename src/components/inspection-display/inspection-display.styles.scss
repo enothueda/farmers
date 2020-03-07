@@ -1,0 +1,25 @@
+.inspection-display {
+	display: flex;
+	justify-content: center;
+
+	.inspection-form {
+		width: 55%;
+		display: flex;
+		flex-direction: row;
+		margin-bottom: 10px;
+
+		.inspection-title {
+			width: 10%;
+		}
+
+		.inspection-group {
+			width: 20%;
+			padding: 0 5px;
+		}
+
+		.inspection-level {
+			width: 20%;
+			padding: 0 5px;
+		}
+	}
+}

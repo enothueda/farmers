@@ -4,7 +4,7 @@ import Ranchs from '../ranchs/ranchs.component';
 
 const DisplayPage = () => {
     return(
-        <div>
+        <div className='display-page'>
             <Ranchs/>
             <Inspections />
         </div> 

@@ -1,0 +1,17 @@
+.group {
+	display: flex;
+	justify-content: center;
+
+	.form-input-label {
+		width: 150px;
+		text-align: right;
+		padding: 0 5px;
+	}
+
+	.form-input {
+		padding: 2px;
+		margin-bottom: 5px;
+		width: 200px;
+
+	}
+}
