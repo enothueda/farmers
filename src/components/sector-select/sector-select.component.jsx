@@ -32,7 +32,7 @@ const SectorSelect = ({ allSectors }) => {
             {
                allSectors ?
                allSectors.map(sector => <SectorOptions key={sector.sector} sector={sector} />) :
-               <h3>select a Ranch</h3>
+               <h3>SELECT A RANCH</h3>
             }           
         </div>
 

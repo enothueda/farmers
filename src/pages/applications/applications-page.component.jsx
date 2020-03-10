@@ -2,7 +2,7 @@ import React from 'react';
 
 const Applications = () => (
     <div>
-        <h1>APPLICATIONS PAGE</h1>
+        <h1>Applications Page</h1>
     </div>
 );
 

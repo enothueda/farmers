@@ -85,12 +85,14 @@ class PlantsInspection extends React.Component {
 			        	required
 			        />
 
-			        <p>Sample Spot (GPS or reference)</p>
+			        {
+			        /*	<p>Sample Spot (GPS or reference)</p> */
+			        }
 		        
 		            <FormInput 
 		            	type='number'
 		            	name='sample'
-		            	label='Sample Spot'
+		            	label='Plants / Sample'
 		            	placeholder="Plants per sample"
 		            	value={this.state.sample}
 		            	onChange={this.handleChange}
@@ -103,9 +105,7 @@ class PlantsInspection extends React.Component {
 		        <div className='inspection'>
 		            <h4>Inspection Records</h4>
 		            <InspectionRecords records={records} />
-		            <p>Insects Added</p>
-		            <p>Quantity per point</p>
-		            <p>Incidence Level</p>
+		            
 		        </div>		        
 		    	               
 		    </div> 

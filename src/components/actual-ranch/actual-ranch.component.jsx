@@ -18,7 +18,7 @@ const ActualRanch = ({ currentRanch }) => (
 			</div>
 			)
 			:
-			'Select a Ranch'
+			<span className='note'>SELECT A RANCH</span>
 		}		
 	</div>
 );

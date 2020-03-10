@@ -19,8 +19,7 @@ class Inspections extends React.Component {
                 <ActualRanch />
                 <ActualSector />  
                 <RanchSelect />
-                <SectorSelect />
-                                         
+                <SectorSelect />                                         
                 
                 <PlantsInspection/>            
             </div>

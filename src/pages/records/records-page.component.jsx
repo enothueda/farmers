@@ -4,7 +4,7 @@ import './records-page.styles.scss';
 
 const Records = () => (
 	<div>
-		RECORDS
+		<h1>Records</h1>
 	</div>
 )
 
