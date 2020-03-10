@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import './navbar.styles.scss'
 
 const NavBar = ({ currentUser, currentCompany, currentRanch }) => {
-    console.log('NavBar company', currentCompany );
+    //console.log('NavBar company', currentCompany );
     return(
         <div className='navbar'>
             <Link className='option' to='/'>Home</Link>

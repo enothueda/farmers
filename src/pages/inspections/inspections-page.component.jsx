@@ -9,7 +9,7 @@ import PlantsInspection from '../../components/plants-inspection/plants-inspecti
 class Inspections extends React.Component {
 
     componentDidMount() {
-        console.log('Inspection Page Mounted')
+        //console.log('Inspection Page Mounted')
     }
 
     render(){

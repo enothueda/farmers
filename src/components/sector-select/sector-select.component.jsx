@@ -7,7 +7,7 @@ import { selectAllSectors } from '../../redux/sector/sector.selectors';
 import './sector-select.styles.scss';
 
 const SectorSelect = ({ allSectors }) => {
-    console.log('Sector Map', allSectors);
+    //console.log('Sector Map', allSectors);
    
     return(
         <div className='sector-select'>

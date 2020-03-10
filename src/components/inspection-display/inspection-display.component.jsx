@@ -42,8 +42,8 @@ class InspectionDisplay extends React.Component {
 	render() {
 		const { group, currentCrop } = this.props;
 		const { diseases, pests, beneficials } = currentCrop;
-		console.log('state render', this.state);
-		console.log('current pest', currentCrop)
+		//console.log('state render', this.state);
+		//console.log('current pest', currentCrop)
 		return (
 			<div className='inspection-display'>				
 				<form className='inspection-form' onSubmit={this.handleSubmit} >
