@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import NavBar from './components/navbar/navbar.component';
+import MenuIcon from './components/menu-icon/menu-icon.component';
 import HomePage from './pages/homepage/homepage.component';
 import CompanyPage from './pages/company/company-page.component';
 import SignInAndSignUpPage from './pages/signin-and-signup/signin-and-signup.component';
@@ -19,6 +20,7 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { setCurrentCompany } from './redux/company/company.actions';
 import { setAllRanches } from './redux/ranch/ranch.actions';
 import { setCropsInfo } from './redux/crops/crops.actions';
+import { selectNavBarHidden } from './redux/user/user.selectors';
 
 import './App.css';
 
@@ -65,12 +67,15 @@ class App extends React.Component {
   }
 
   render() {
+    const { hidden } = this.props;
     return (
       <div className="App">
-        <div className="navbar">
-          <h1>Farmers</h1>
+        {
+          hidden ?
+          <MenuIcon /> :
           <NavBar />
-        </div>
+        }      
+        
         <div className="display">
           <Switch>
             <Route exact path='/' component={HomePage} />
@@ -90,6 +95,10 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  hidden: selectNavBarHidden(state)
+})
+
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
   setCurrentCompany: company => dispatch(setCurrentCompany(company)),
@@ -98,4 +107,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

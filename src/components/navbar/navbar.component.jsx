@@ -5,13 +5,18 @@ import { connect } from 'react-redux';
 import { auth } from '../../firebase/firebase.utils';
 import { selectCurrentRanch } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { toggleNavBarHidden } from '../../redux/user/user.actions';
 
 import './navbar.styles.scss'
 
-const NavBar = ({ currentUser, currentCompany, currentRanch }) => {
+const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
     //console.log('NavBar company', currentCompany );
     return(
         <div className='navbar'>
+            <div className='close-icon'>
+                <div className='close-button' onClick={()=> dispatch(toggleNavBarHidden())}>&#10005;</div>
+            </div>
+            <h1>Farmers</h1>
             <Link className='option' to='/'>Home</Link>
             <Link className='option' to='/company'>
                 {

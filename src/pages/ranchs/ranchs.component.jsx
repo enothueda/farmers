@@ -32,7 +32,7 @@ class Ranchs extends React.Component {
                 {
                     currentRanch ?
                     <AddSectors /> :
-                    <h4>Please Add or Select a Ranch</h4>
+                    ''
                 }
                                  
             </div>
