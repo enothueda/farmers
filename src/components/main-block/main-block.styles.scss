@@ -1,0 +1,25 @@
+.main-block {
+	display: flex;
+	margin: auto;
+	flex-direction: row;
+	align-content: center;
+	width: 70%;
+	margin-top: 20px;
+	background: lightgreen;
+
+	.figure {
+		width: 30%;
+		height: auto;
+
+		img {
+			width: 350px;
+
+		}
+	}
+
+	.main-section {
+		width: 70%;
+		font-size: 2em;
+	}
+
+}
