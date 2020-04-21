@@ -1,7 +1,7 @@
 import React from 'react';
 
 import banner1 from '../../assets/banner1.png';
-import ladybug from '../../assets/ladybug.jpg';
+//import ladybug from '../../assets/ladybug.jpg';
 import lupa from '../../assets/lupa.jpg';
 import data from '../../assets/data.jpg';
 import access from '../../assets/access.jpg'

@@ -15,10 +15,14 @@ import Inspections from './pages/inspections/inspections-page.component';
 import Applications from './pages/applications/applications-page.component';
 import Records from './pages/records/records-page.component';
 
-import { auth, createUserProfileDocument, getCompanyFromUser, getRanchesfromCompany, getCropsForSelect } from './firebase/firebase.utils';
+import { auth, 
+  createUserProfileDocument, 
+  getCompanyIdFromUser, 
+  getCompanyInfoFromId, 
+  getCropsForSelect 
+} from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
-import { setCurrentCompany } from './redux/company/company.actions';
-import { setAllRanches } from './redux/ranch/ranch.actions';
+import { getAllCompaniesFromUser, clearCompaniesInfo } from './redux/company/company.actions';
 import { setCropsInfo } from './redux/crops/crops.actions';
 import { selectNavBarHidden } from './redux/user/user.selectors';
 
@@ -28,7 +32,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    const { setCurrentUser, setCurrentCompany, setAllRanches, setCropsInfo } = this.props;
+    const { setCurrentUser, getAllCompanies, setCropsInfo, clearCompaniesInfo } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -40,6 +44,24 @@ class App extends React.Component {
           });       
         });
         
+        
+        clearCompaniesInfo();
+        const allCompanies = await getCompanyIdFromUser(userRef);
+        if(allCompanies) {
+          const companyRef = await allCompanies.map(companyId => getCompanyInfoFromId(companyId))
+          companyRef.forEach(
+            company => company.onSnapshot(
+              snapshot => 
+                getAllCompanies({
+                  id: snapshot.id,
+                  companyName: snapshot.data().companyName
+                })            
+            )
+          )
+        }
+        
+       
+        /*
         const companyRef = await getCompanyFromUser(userRef);
         companyRef.onSnapshot(snapShot => {
           setCurrentCompany({
@@ -51,6 +73,7 @@ class App extends React.Component {
         const allRanchesDocs = await getRanchesfromCompany(companyRef);
         const ranchesInfo = await allRanchesDocs.map(doc => doc.data())
         setAllRanches(ranchesInfo);
+        */
 
         const allCrops = await getCropsForSelect();
         const cropsInfo = await allCrops.map(doc => doc.data())
@@ -101,9 +124,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user)),
-  setCurrentCompany: company => dispatch(setCurrentCompany(company)),
-  setAllRanches: ranches => dispatch(setAllRanches(ranches)),
-  setCropsInfo: crops => dispatch(setCropsInfo(crops))
+  setCropsInfo: crops => dispatch(setCropsInfo(crops)),
+  getAllCompanies: company => dispatch(getAllCompaniesFromUser(company)),
+  clearCompaniesInfo: () => dispatch(clearCompaniesInfo())
 })
 
 

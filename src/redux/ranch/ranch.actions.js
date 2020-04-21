@@ -8,4 +8,8 @@ export const setCurrentRanch = ranch => ({
 export const setAllRanches = ranches => ({
 	type: RanchActionTypes.SET_ALL_RANCHES,
 	payload: ranches
+});
+
+export const clearRanchesData = () => ({
+	type: RanchActionTypes.CLEAR_RANCHES
 })

@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ladybug from '../../assets/ladybug.jpg'
-
 import './main-block.styles.scss';
 
 const MainBlock = ({position, title, description, pic}) => {

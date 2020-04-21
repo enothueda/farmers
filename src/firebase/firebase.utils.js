@@ -42,13 +42,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	return userRef;
 }
 
-export const createCompanyProfileDocument = async (companyProfile, additionalData) => {
-	if(!companyProfile) return;
-
+export const createCompanyProfileDocument = async (companyProfile, currentUser, additionalData) => {
+	if(!companyProfile || !currentUser) return;
+	
 	const companyRef = await firestore.collection('companies').doc()
 	const companySnapShot = await companyRef.get();
-	const userCreator = await companySnapShot._firestore._credentials.currentUser.uid;
-	console.log('companySnapshot', companySnapShot);
+	const userCreator = await currentUser.id;
+	//console.log('companySnapshot', userCreator);
 	
 	if(!companySnapShot.exists) {
 		const { companyName, country, location, address, logo } = companyProfile;
@@ -74,17 +74,34 @@ export const createCompanyProfileDocument = async (companyProfile, additionalDat
 			console.log('error creating company', error.message)
 		}		
 	}
-	return companyRef;
+	return companyRef; 
 }
 
-export const getCompanyFromUser = async (user, additionalData) => {
+export const getCompanyIdFromUser = async (user, additionalData) => {
 	const userRef = await firestore.collection('users').doc(user.id);
 	const userSnapshot = await userRef.get();
 	const userData = await userSnapshot.data();
-	const firstCompany = await userData.company[0] 
-	//take only the first company, has to be changed as the ranch and sector (to Map)
-	const companyRef = await firestore.collection('companies').doc(firstCompany);
-	
+	if(userData.company) {
+		const allCompanies = await userData.company
+
+		/* To get company information from user, however, return a promise resolve issue
+		const companyNames = await allCompanies.map(async companyId => {
+			const companyInfo = await firestore.collection('companies').doc(companyId)
+			const companySnapshot = await companyInfo.get();
+			const companyData = await companySnapshot.data().companyName
+			return companyData;			
+		})	*/
+
+		return allCompanies;
+	}
+	return	
+}
+
+export const getCompanyInfoFromId = (companyId, additionalData) => {
+	if(!companyId) return;
+
+	const companyRef = firestore.doc(`companies/${companyId}`);
+
 	return companyRef;
 }
 

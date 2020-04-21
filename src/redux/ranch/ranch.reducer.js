@@ -2,7 +2,7 @@ import { RanchActionTypes } from './ranch.types';
 
 const INITIAL_STATE = {
 	currentRanch: null,
-	allRanches: null
+	allRanches: []
 }
 
 const ranchReducer = (state = INITIAL_STATE, action) => {
@@ -15,7 +15,12 @@ const ranchReducer = (state = INITIAL_STATE, action) => {
 		case RanchActionTypes.SET_ALL_RANCHES:
 			return {
 				...state,
-				allRanches: action.payload
+				allRanches: [...state.allRanches, action.payload]
+			}
+		case RanchActionTypes.CLEAR_RANCHES:
+			return {
+				...state,
+				allRanches: []
 			}
 		default:
 			return state;

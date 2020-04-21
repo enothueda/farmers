@@ -21,7 +21,7 @@ const CompanyProfile = ({ currentCompany }) => {
 			</div> 
 		:
 			<div className='company-profile'>
-				<span>Please Add a Company or Request to your Manager</span>
+				<span>Please Add a Company or Request access to your Manager</span>
 			</div>
 )};
 

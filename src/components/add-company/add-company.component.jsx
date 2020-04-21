@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import { setCurrentCompany } from '../../redux/company/company.actions';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import { createCompanyProfileDocument } from '../../firebase/firebase.utils';
 
@@ -23,10 +24,10 @@ class AddCompany extends React.Component {
 	}
 
 	handleSubmit = async event => {
-		const { setCurrentCompany } = this.props
+		const { setCurrentCompany, currentUser } = this.props
 		event.preventDefault();
 
-		const companyRef = await createCompanyProfileDocument(this.state);
+		const companyRef = await createCompanyProfileDocument(this.state, currentUser);
 		companyRef.onSnapshot(snapShot => {
 			setCurrentCompany({
 				id: snapShot.id,
@@ -89,9 +90,12 @@ class AddCompany extends React.Component {
 	}
 }
 
+const mapStateToProps = state => ({
+	currentUser: selectCurrentUser(state)
+})
 
 const mapDispatchTopProps = dispatch => ({
 	setCurrentCompany: company => dispatch(setCurrentCompany(company))
 })
 
-export default connect(null, mapDispatchTopProps)(AddCompany);
+export default connect(mapStateToProps, mapDispatchTopProps)(AddCompany);
