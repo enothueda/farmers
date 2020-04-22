@@ -2,16 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
-    authDomain: "farmers-db.firebaseapp.com",
-    databaseURL: "https://farmers-db.firebaseio.com",
-    projectId: "farmers-db",
-    storageBucket: "farmers-db.appspot.com",
-    messagingSenderId: "249695488238",
-    appId: "1:249695488238:web:92ccf8542676237589cbff",
-    measurementId: "G-8CSMG7VZCB"
-  };
+const firebaseConfig = 'YOUR API KEY AND INFO HERE'
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -150,7 +141,7 @@ export const addSectorDocumentInRanch = async (sectorInfo, ranchData) => {
 	const sectorRef = await sectorCollectionRef.doc();
 	const sectorSnapshot = sectorRef.get();
 
-	console.log('sector snapshot', sectorSnapshot);
+	//console.log('sector snapshot', sectorSnapshot);
 	if(!sectorSnapshot.exists) {
 		const createdAt = new Date();
 		const { sector, hectares, variety, origin, treatment, plantingDate, density } = sectorInfo

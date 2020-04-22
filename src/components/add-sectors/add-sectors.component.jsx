@@ -28,7 +28,7 @@ class AddSectors extends React.Component {
 	handleSubmit = async event => {
         const { setCurrentSector, currentRanch } = this.props;
         event.preventDefault();
-        console.log('add sector', event);
+        //console.log('add sector', event);
         // add the addSectorInRanchDocument
         const sectorRef = await addSectorDocumentInRanch(this.state, currentRanch);
         sectorRef.onSnapshot(snapShot => 
