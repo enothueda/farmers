@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import NavBar from './components/navbar/navbar.component';
@@ -24,7 +24,7 @@ import { auth,
 import { setCurrentUser } from './redux/user/user.actions';
 import { getAllCompaniesFromUser, clearCompaniesInfo } from './redux/company/company.actions';
 import { setCropsInfo } from './redux/crops/crops.actions';
-import { selectNavBarHidden } from './redux/user/user.selectors';
+import { selectNavBarHidden, selectCurrentUser } from './redux/user/user.selectors';
 
 import './App.css';
 
@@ -54,7 +54,7 @@ class App extends React.Component {
               snapshot => 
                 getAllCompanies({
                   id: snapshot.id,
-                  companyName: snapshot.data().companyName
+                  ...snapshot.data()
                 })            
             )
           )
@@ -102,8 +102,7 @@ class App extends React.Component {
         <div className="display">
           <Switch>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/company' component={CompanyPage} />
-            <Route exact path='/signin' component={SignInAndSignUpPage} />
+            <Route exact path='/company' component={CompanyPage} />        
             <Route exact path='/display' component={DisplayPage} />
             <Route exact path='/user' component={UserPage} />
             <Route exact path='/ranchs' component={Ranchs} />
@@ -111,6 +110,14 @@ class App extends React.Component {
             <Route exact path='/inspections' component={Inspections} />
             <Route exact path='/applications' component={Applications} />
             <Route exact path='/records' component={Records} />
+            <Route 
+              path='/signin' 
+              render={ () =>
+                this.props.currentUser
+                ? <Redirect to='/user'/>
+                : <SignInAndSignUpPage />
+              }
+            />
           </Switch>
         </div>
       </div>
@@ -119,7 +126,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  hidden: selectNavBarHidden(state)
+  hidden: selectNavBarHidden(state),
+  currentUser: selectCurrentUser(state)
 })
 
 const mapDispatchToProps = dispatch => ({

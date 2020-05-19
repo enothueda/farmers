@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ImageUploader from '../image-uploader/image-uploader.component';
+
 import './user-profile.styles.scss';
 
 const UserProfile = ({currentUser, currentCompany}) => {
@@ -15,12 +17,16 @@ const UserProfile = ({currentUser, currentCompany}) => {
 		    			<p className='user-data'>{currentUser.email}</p>
 		    			<p className='user-data'>{currentUser.phoneNumber}</p>
 		    			<p className='user-data'>
-		    				{
-		    					currentCompany ? currentCompany.companyName : 'Company'
-		    				}
+		    				{	currentCompany ? currentCompany.companyName : 'Company'	}
 		    			</p>
 		    		</div>    		
 		    	</div>
+		    	<ImageUploader 
+					collection='users'
+					docId={currentUser.id}
+					folder='profile'
+					route='photoURL'
+				/>	
 		    </div>
 		:
 			<div className='user-profile'> Loadig user ... </div>

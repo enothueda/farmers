@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ImageUploader from '../image-uploader/image-uploader.component';
 import './company-profile.styles.scss';
 
 const CompanyProfile = ({ currentCompany }) => {
@@ -9,15 +10,23 @@ const CompanyProfile = ({ currentCompany }) => {
 		currentCompany 
 		? 
 			<div className='company-profile'>
-				<h2>{currentCompany.companyName}</h2>
-				<div className='logo-container'>
-					<img alt='logo' />
+				
+				<div className='company-info'>
+					<img alt='logo' src={currentCompany.logo} />
+					<div className='company-data'>
+						<h2>{currentCompany.companyName}</h2>
+						<span>{currentCompany.country}</span>
+						<span>{currentCompany.location}</span>
+						<span>{currentCompany.address}</span>
+					</div>
 				</div>
-				<div className='company-data'>
-					<span>{currentCompany.country}</span>
-					<span>{currentCompany.location}</span>
-					<span>{currentCompany.address}</span>
-				</div>			
+				
+				<ImageUploader 
+					collection='companies'
+					docId={currentCompany.id}
+					folder='logo'
+					route='logo'
+				/>		
 			</div> 
 		:
 			<div className='company-profile'>

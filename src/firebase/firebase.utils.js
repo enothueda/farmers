@@ -1,8 +1,18 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = 'YOUR API KEY AND INFO HERE'
+const firebaseConfig = {
+    apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
+    authDomain: "farmers-db.firebaseapp.com",
+    databaseURL: "https://farmers-db.firebaseio.com",
+    projectId: "farmers-db",
+    storageBucket: "farmers-db.appspot.com",
+    messagingSenderId: "249695488238",
+    appId: "1:249695488238:web:92ccf8542676237589cbff",
+    measurementId: "G-8CSMG7VZCB"
+  };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -66,6 +76,22 @@ export const createCompanyProfileDocument = async (companyProfile, currentUser, 
 		}		
 	}
 	return companyRef; 
+}
+
+export const updateImageInDocument = async (collection, docId, route, url, additionalData) => {
+	if(!collection || !docId || !route ) return;
+	console.log('fileupload', url)
+	const docRef = await firestore.doc(`${collection}/${docId}`)
+	const imageDocUpdate = {}
+	imageDocUpdate[`${route}`] = url
+	console.log(imageDocUpdate);
+	try {
+		await docRef.update(imageDocUpdate)
+	} catch (error) {
+		console.log(error)
+	}
+
+	
 }
 
 export const getCompanyIdFromUser = async (user, additionalData) => {
@@ -232,6 +258,7 @@ firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
