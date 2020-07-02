@@ -1,18 +1,24 @@
 .sector-options {
 	width: 100%;
     display: flex;
-    min-height: 10px;
-    
+    min-height: 10px;    
     padding: 5px 0;
     font-size: 20px;
     align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lightblue;
+    }
 
     .option {
-    	width: 20%;
+    	width: 25%;
 
     	&:last-child {
     		border: 0 10px;
     	}
+
+        
     }
 
     &:last-child {

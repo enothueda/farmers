@@ -22,12 +22,6 @@ const RanchSelect = ({currentCompany, allRanches}) => {
             <div className='header-block'>
                 <span>Crop</span>
             </div>
-            <div className='header-block'>
-                <span>Sectors</span>
-            </div>
-             <div className='header-block'>
-                <span>Select Ranch</span>
-            </div>
         </div>        
         {
             allRanches 

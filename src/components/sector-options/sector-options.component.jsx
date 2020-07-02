@@ -7,12 +7,12 @@ import { setCurrentSector } from '../../redux/sector/sector.actions';
 import './sector-options.styles.scss';
 
 const SectorOptions = ({ sector, setCurrentSector }) => (
-	<div className='sector-options'>
+	<div className='sector-options' onClick={()=> setCurrentSector(sector)} >
 		<span className='option'>{sector.sector}</span>
 		<span className='option'>{sector.variety}</span>
 		<span className='option'>{sector.hectares}</span>
 		<span className='option'>{sector.plantingDate}</span>
-		<CustomButton onClick={()=> setCurrentSector(sector)} className='option'>select sector</CustomButton>
+		
 	</div>
 );
 

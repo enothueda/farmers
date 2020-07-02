@@ -1,9 +1,13 @@
 .inspection-records {
-	width: 50%;
+	width: 60%;
 	display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px auto 0;
+
+    @media screen and (max-width: 800px) {
+        width: 85%;
+    }
 
 	.records-header {
 		width: 100%;

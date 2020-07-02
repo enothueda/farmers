@@ -16,24 +16,19 @@ const RanchOptions = ({ranch, setCurrentRanch, cropsInfo, setCurrentCrop, curren
 	const currentCrop = cropsInfo.find(crop => ranch.crop === crop.name);
 
 	return(
-		<div className='ranch-options' >
+		<div className='ranch-options' 
+			onClick={() => {
+				setCurrentRanch(ranch);
+				setCurrentCrop(currentCrop);
+				getSectorsFromRanch(ranch)
+				.then(response => response.map(doc => doc.data()))
+				.then(docData => setAllSectors(docData))
+				.catch(error => console.log(error.message));
+			}}
+		>
 			<span className='option'> {ranch.ranchId} </span>
 			<span className='option'> {ranch.name} </span>
-			<span className='option'> {ranch.crop} </span>
-			<span className='option'> sectors </span> 
-			<CustomButton 
-				onClick={() => {
-					setCurrentRanch(ranch);
-					setCurrentCrop(currentCrop);
-					getSectorsFromRanch(ranch)
-					.then(response => response.map(doc => doc.data()))
-					.then(docData => setAllSectors(docData))
-					.catch(error => console.log(error.message));
-				}} 
-				className='option'
-			>
-			select ranch
-			</CustomButton>		
+			<span className='option'> {ranch.crop} </span>	
 		</div>
 	)
 };

@@ -2,11 +2,15 @@
   text-align: center;
   display: flex;
   flex-direction: row;
+
+	.display {
+		flex-grow: 1;
+	}
+  
+
 }
 
-.display {
-  flex-grow: 1;
-}
+
 
 a {
 	text-decoration: none;

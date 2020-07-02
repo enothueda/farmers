@@ -38,7 +38,6 @@ class AddCompany extends React.Component {
 
     handleChange = event => {
     	const {name, value} = event.target;
-
     	this.setState({ [name]: value});
     }
 
@@ -46,7 +45,7 @@ class AddCompany extends React.Component {
 	render() {
 		return (
 			<div className='add-company'>
-				<h2>Add your Company</h2>
+				<h2>Add A New Company</h2>
 				<form onSubmit={this.handleSubmit}>
 					<FormInput 
 						type='text'

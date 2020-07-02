@@ -24,10 +24,7 @@ const SectorSelect = ({ allSectors }) => {
                 </div>
                 <div className='header-block'>
                     <span>Planting Date</span>
-                </div>
-                <div className='header-block'>
-                    <span>Select Sector</span>
-                </div>
+                </div>               
             </div>            
             {
                allSectors ?

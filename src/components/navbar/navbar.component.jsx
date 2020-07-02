@@ -23,6 +23,14 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
                     currentCompany ? currentCompany.companyName : 'Add Company'
                 }
             </Link>           
+            
+            
+            <Link className='option' to='/user'> {currentUser ? currentUser.displayName : 'User'} </Link>
+            <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'No Ranch'}</Link>
+            <Link className='option' to='/inspections'>Inspections</Link>
+            <Link className='option' to='/applications'>Applications</Link>            
+            <Link className='option' to='/records'>Records</Link>
+            <br />
             {
                 currentUser?
                 <div className='option' onClick={() => auth.signOut()} >Sign Out</div>
@@ -30,13 +38,6 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
                 <Link className='option' to='/signin'>Sign In</Link> 
             }
             <br />
-            
-            <Link className='option' to='/user'> {currentUser ? currentUser.displayName : 'User'} </Link>
-            <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'Not Ranch'}</Link>
-            <Link className='option' to='/inspections'>Inspections</Link>
-            <Link className='option' to='/applications'>Applications</Link>            
-            <Link className='option' to='/records'>Records</Link>
-              
             { /*
             
             <Link className='option' to='/maps'>Maps</Link>    

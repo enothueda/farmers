@@ -26,7 +26,7 @@ import { getAllCompaniesFromUser, clearCompaniesInfo } from './redux/company/com
 import { setCropsInfo } from './redux/crops/crops.actions';
 import { selectNavBarHidden, selectCurrentUser } from './redux/user/user.selectors';
 
-import './App.css';
+import './App.scss';
 
 class App extends React.Component {
   unsubscribeFromAuth = null
@@ -58,8 +58,7 @@ class App extends React.Component {
                 })            
             )
           )
-        }
-        
+        }        
        
         /*
         const companyRef = await getCompanyFromUser(userRef);
