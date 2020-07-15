@@ -27,7 +27,7 @@ class FertilizationRecord extends React.Component {
 	render() {
 		return (
 			<div className='application-record'>
-				<h1>Register your application</h1>
+				<h2>Record your Fertilization</h2>
 				<form onSubmit={this.handleSubmit}>
 					<FormInput 
                         type='date'

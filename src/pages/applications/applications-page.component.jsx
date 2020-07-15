@@ -7,7 +7,7 @@ import ApplicationRecord from '../../components/application-record/application-r
 
 const Applications = () => (
     <div>
-        <h1>Applications Page</h1>
+        <h1>Applications</h1>
         <ActualRanch />
         <ActualSector />  
 

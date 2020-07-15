@@ -8,7 +8,7 @@ import './harvest-page.styles.scss';
 
 const Harvest = () => (
     <div>
-        <h1>Harvest Page</h1>
+        <h1>Harvest</h1>
         <ActualRanch />
         <ActualSector />
 

@@ -26,7 +26,7 @@ class HarvestRecord extends React.Component {
 	render() {
 		return (
 			<div className='application-record'>
-				<h1>Register your application</h1>
+				<h1>Record your Harvest</h1>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'
