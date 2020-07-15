@@ -3,7 +3,16 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = 'YOUR API INFO HERE'
+const firebaseConfig = {
+	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
+	authDomain: "farmers-db.firebaseapp.com",
+	databaseURL: "https://farmers-db.firebaseio.com",
+	projectId: "farmers-db",
+	storageBucket: "farmers-db.appspot.com",
+	messagingSenderId: "249695488238",
+	appId: "1:249695488238:web:92ccf8542676237589cbff",
+	measurementId: "G-8CSMG7VZCB"
+};
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -120,7 +129,7 @@ export const getCompanyInfoFromId = (companyId, additionalData) => {
 export const createNewRanchDocument = async (ranchInfo, companyInfo, additionalData) => {
 	if(!ranchInfo) return;
 	const companyId = companyInfo.id
-	const ranchRef = await firestore.doc(`companies/${companyId}/ranchs/${ranchInfo.ranchId}`);
+	const ranchRef = firestore.doc(`companies/${companyId}/ranchs/${ranchInfo.ranchId}`);
 	const ranchSnapshot = await ranchRef.get();
 	console.log('ranchRef Utils', ranchSnapshot);
 
@@ -158,8 +167,8 @@ export const addSectorDocumentInRanch = async (sectorInfo, ranchData) => {
 	if (!ranchData || !sectorInfo) return;
 
 	const { companyId, ranchId } = ranchData;
-	const sectorCollectionRef = await firestore.collection(`companies/${companyId}/ranchs/${ranchId}/sectors`);
-	const sectorRef = await sectorCollectionRef.doc();
+	const sectorCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/sectors`);
+	const sectorRef = sectorCollectionRef.doc();
 	const sectorSnapshot = sectorRef.get();
 
 	//console.log('sector snapshot', sectorSnapshot);

@@ -12,8 +12,11 @@ import UserPage from './pages/user/user-page.component';
 import Ranchs from './pages/ranchs/ranchs.component';
 import Maps from './pages/maps/maps-page.component';
 import Inspections from './pages/inspections/inspections-page.component';
+import Fertilization from './pages/fertilization/fertilization-page.component';
 import Applications from './pages/applications/applications-page.component';
-import Records from './pages/records/records-page.component';
+import Harvest from './pages/harvest/harvest-page.component';
+
+//import Records from './pages/records/records-page.component';
 
 import { auth, 
   createUserProfileDocument, 
@@ -107,8 +110,9 @@ class App extends React.Component {
             <Route exact path='/ranchs' component={Ranchs} />
             <Route exact path='/maps' component={Maps} />
             <Route exact path='/inspections' component={Inspections} />
+            <Route exact path='/fertilization' component={Fertilization} />
             <Route exact path='/applications' component={Applications} />
-            <Route exact path='/records' component={Records} />
+            <Route exact path='/harvest' component={Harvest} />
             <Route 
               path='/signin' 
               render={ () =>

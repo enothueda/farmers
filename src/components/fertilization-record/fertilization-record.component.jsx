@@ -3,9 +3,10 @@ import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import './application-record.styles.scss';
+import './fertilization-record.styles.scss';
 
-class ApplicationRecord extends React.Component {
+
+class FertilizationRecord extends React.Component {
 	constructor() {
 		super();
 		this.state = {
@@ -67,18 +68,9 @@ class ApplicationRecord extends React.Component {
                     <FormInput 
                         type='text'
                         name='ingredient'
-                        label='Ingredient'
+                        label='Fertilizante'
                         placeholder='Active Ingredient'
                         value={this.state.ingredient}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <FormInput 
-                        type='text'
-                        name='equipment'
-                        label='Equipment'
-                        placeholder='Equipment or Machinery'
-                        value={this.state.equipment}
                         onChange={this.handleChange}
                         required
                     />
@@ -86,7 +78,7 @@ class ApplicationRecord extends React.Component {
                         type='number'
                         name='dose'
                         label='Dose'
-                        placeholder='Dose per hectar'
+                        placeholder='Dose/Quantity per hectar'
                         value={this.state.dose}
                         onChange={this.handleChange}
                         required
@@ -94,45 +86,27 @@ class ApplicationRecord extends React.Component {
                     <FormInput 
                         type='number'
                         name='volume'
-                        label='Water Volume'
-                        placeholder='Water Volume per hectar'
+                        label='Volume'
+                        placeholder='Quantity per hectar'
                         value={this.state.volume}
                         onChange={this.handleChange}
                         required
                     /> 
                     <FormInput 
                         type='text'
-                        name='pest'
-                        label='Pest'
-                        placeholder='Pest or Disease'
+                        name='method'
+                        label='Aplication Method'
+                        placeholder='Foliar, Irrigation, Granular'
                         value={this.state.pest}
                         onChange={this.handleChange}
                         required
-                    />
-                    <FormInput 
-                        type='number'
-                        name='interval'
-                        label='Interval'
-                        placeholder='Safety Interval'
-                        value={this.state.dose}
-                        onChange={this.handleChange}
-                        required
-                    /> 
-                    <FormInput 
-                        type='number'
-                        name='reentry'
-                        label='Re-entry Period'
-                        placeholder='Safety Time for worker to can entry'
-                        value={this.state.dose}
-                        onChange={this.handleChange}
-                        required
-                    /> 
-                    <CustomButton type='submit'>Record Application</CustomButton>
+                    />                    
+                    <CustomButton type='submit'>Record Fertilization</CustomButton>
 				</form>
 			</div>
 		)
 	}
 
-}
+};
 
-export default ApplicationRecord;
+export default FertilizationRecord;

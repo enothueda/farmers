@@ -17,9 +17,7 @@ class Inspections extends React.Component {
             <div className="inspections">
                 <h1>Plant Health Inspection</h1>
                 <ActualRanch />
-                <ActualSector />  
-                <RanchSelect />
-                <SectorSelect />                                         
+                <ActualSector />                                                 
                 
                 <PlantsInspection/>            
             </div>

@@ -18,18 +18,17 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
             </div>
             <h1>Farmers</h1>
             <Link className='option' to='/'>Home</Link>
+            <Link className='option' to='/user'> {currentUser ? currentUser.displayName : 'User'} </Link>
             <Link className='option' to='/company'>
                 {
                     currentCompany ? currentCompany.companyName : 'Add Company'
                 }
             </Link>           
-            
-            
-            <Link className='option' to='/user'> {currentUser ? currentUser.displayName : 'User'} </Link>
             <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'No Ranch'}</Link>
             <Link className='option' to='/inspections'>Inspections</Link>
+            <Link className='option' to='/fertilization'>Fertilization</Link>   
             <Link className='option' to='/applications'>Applications</Link>            
-            <Link className='option' to='/records'>Records</Link>
+            <Link className='option' to='/harvest'>Harvest</Link>
             <br />
             {
                 currentUser?
@@ -39,7 +38,7 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
             }
             <br />
             { /*
-            
+            <Link className='option' to='/records'>Records</Link>
             <Link className='option' to='/maps'>Maps</Link>    
             <Link className='option' to=''>Production</Link>
             <Link className='option' to=''>Cultural Labor</Link>

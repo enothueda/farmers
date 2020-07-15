@@ -19,17 +19,18 @@ class InspectionDisplay extends React.Component {
 	}
 
 	handleSubmit = event => {
-		const { addRecord } = this.props
+		const { addRecord } = this.props;
+		const { name } = event.target;
 		event.preventDefault();
 		// To add a ternary with currentSector ? addRecord... : select a sector
 		addRecord(this.state.data);
+		// this is try to clean all data from select, has to check the value with ternary
+		this.setState({ incidence: '' })
 
-		this.setState({ quantity:'', incidence: '' })
 	}
 
 	handleChange = event => {
 		const { name, value } = event.target;
-
 		this.setState(prevState => ({
 			data: {
 				...prevState.data,
@@ -69,7 +70,7 @@ class InspectionDisplay extends React.Component {
 					/>
 
 					<CustomSelect className='inspection-level' name='incidence' onChange={this.handleChange}>
-						<option>Incidence Level</option>
+						<option value=''>Incidence Level</option>
 						<option value='1' >Level 1</option>
 						<option value='2' >Level 2</option>
 						<option value='3' >Level 3</option>
