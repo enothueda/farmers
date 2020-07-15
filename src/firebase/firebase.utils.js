@@ -3,16 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = {
-	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
-	authDomain: "farmers-db.firebaseapp.com",
-	databaseURL: "https://farmers-db.firebaseio.com",
-	projectId: "farmers-db",
-	storageBucket: "farmers-db.appspot.com",
-	messagingSenderId: "249695488238",
-	appId: "1:249695488238:web:92ccf8542676237589cbff",
-	measurementId: "G-8CSMG7VZCB"
-};
+const firebaseConfig = 'YOUR API KEY AND INFO HERE'
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -231,14 +222,13 @@ export const createInspectionDocumentInRanch = async (inspection, sectorData, in
 	console.log('sector', sectorData);
 	console.log('inspector', inspector)
 	const { sector, companyId, ranchId } = sectorData
-	const inspectionCollectionRef = await firestore.collection(`companies/${companyId}/ranchs/${ranchId}/inspection`);
-	const inspectionRef = await inspectionCollectionRef.doc();
+	const inspectionCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/inspection`);
+	const inspectionRef = inspectionCollectionRef.doc();
 	const inspectionSnapshot = await inspectionRef.get();
 
 	if(!inspectionSnapshot.exists) {
 		const createdAt = new Date();
-		const { inspectionDate, records, sample } = inspection
-		
+		const { inspectionDate, records, sample } = inspection		
 
 		try {
 			await inspectionRef.set({
