@@ -29,6 +29,7 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
             <Link className='option' to='/fertilization'>Fertilization</Link>   
             <Link className='option' to='/applications'>Applications</Link>            
             <Link className='option' to='/harvest'>Harvest</Link>
+            <Link className='option' to='/inventory'>Inventory</Link>
             <br />
             {
                 currentUser?
@@ -42,7 +43,6 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
             <Link className='option' to='/maps'>Maps</Link>    
             <Link className='option' to=''>Production</Link>
             <Link className='option' to=''>Cultural Labor</Link>
-            <Link className='option' to=''>Inventory</Link>
             <Link className='option' to=''>Store</Link>
             <Link className='option' to=''>Dashboard</Link>
             <Link className='option' to=''>Support</Link>

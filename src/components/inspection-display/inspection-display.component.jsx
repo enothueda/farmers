@@ -53,10 +53,10 @@ class InspectionDisplay extends React.Component {
 						<option>Select {group}</option>
 						{	
 							group === 'pests' ?
-							pests.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>) :
+							pests.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>) :
 								group === 'diseases' ?
-								diseases.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>) :
-								beneficials.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>)
+								diseases.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>) :
+								beneficials.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>)
 						}
 					</CustomSelect>
 

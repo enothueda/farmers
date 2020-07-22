@@ -15,6 +15,7 @@ import Inspections from './pages/inspections/inspections-page.component';
 import Fertilization from './pages/fertilization/fertilization-page.component';
 import Applications from './pages/applications/applications-page.component';
 import Harvest from './pages/harvest/harvest-page.component';
+import Inventory from './pages/inventory/inventory-page.component';
 
 //import Records from './pages/records/records-page.component';
 
@@ -92,13 +93,16 @@ class App extends React.Component {
   }
 
   render() {
-    const { hidden } = this.props;
+    const { hidden, currentUser } = this.props;
     return (
       <div className="App">
         {
-          hidden ?
-          <MenuIcon /> :
-          <NavBar />
+          currentUser
+          ?  
+            hidden 
+            ? <MenuIcon /> 
+            : <NavBar />
+          : null
         }      
         
         <div className="display">
@@ -113,6 +117,7 @@ class App extends React.Component {
             <Route exact path='/fertilization' component={Fertilization} />
             <Route exact path='/applications' component={Applications} />
             <Route exact path='/harvest' component={Harvest} />
+            <Route exact path='/inventory' component={Inventory} />
             <Route 
               path='/signin' 
               render={ () =>

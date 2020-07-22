@@ -4,12 +4,10 @@ import 'firebase/storage';
 import 'firebase/auth';
 
 const firebaseConfig = 'YOUR API KEY AND INFO HERE'
-
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
 
 	const userRef = firestore.doc(`users/${userAuth.uid}`);
-
 	const snapShot = await userRef.get();
 
 	if(!snapShot.exists) {
@@ -37,16 +35,14 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 export const createCompanyProfileDocument = async (companyProfile, currentUser, additionalData) => {
 	if(!companyProfile || !currentUser) return;
 	
-	const companyRef = await firestore.collection('companies').doc()
+	const companyRef = firestore.collection('companies').doc()
 	const companySnapShot = await companyRef.get();
 	const userCreator = await currentUser.id;
-	//console.log('companySnapshot', userCreator);
-	
+	//console.log('companySnapshot', userCreator);	
 	if(!companySnapShot.exists) {
 		const { companyName, country, location, address, logo } = companyProfile;
 		const companyCreatedAt = new Date();
-
-		const userRef = await firestore.collection('users').doc(userCreator);
+		const userRef =  firestore.collection('users').doc(userCreator);
 		userRef.update({
 			company: firebase.firestore.FieldValue.arrayUnion(companySnapShot.id)
 		});
@@ -76,7 +72,7 @@ export const createCompanyProfileDocument = async (companyProfile, currentUser, 
 export const updateImageInDocument = async (collection, docId, route, url, additionalData) => {
 	if(!collection || !docId || !route ) return;
 	console.log('fileupload', url)
-	const docRef = await firestore.doc(`${collection}/${docId}`)
+	const docRef = firestore.doc(`${collection}/${docId}`)
 	const imageDocUpdate = {}
 	imageDocUpdate[`${route}`] = url
 	console.log(imageDocUpdate);
@@ -85,14 +81,13 @@ export const updateImageInDocument = async (collection, docId, route, url, addit
 	} catch (error) {
 		console.log(error)
 	}
-
 	
 }
 
 export const getCompanyIdFromUser = async (user, additionalData) => {
-	const userRef = await firestore.collection('users').doc(user.id);
+	const userRef = firestore.collection('users').doc(user.id);
 	const userSnapshot = await userRef.get();
-	const userData = await userSnapshot.data();
+	const userData = userSnapshot.data();
 	if(userData.company) {
 		const allCompanies = await userData.company
 
@@ -125,23 +120,13 @@ export const createNewRanchDocument = async (ranchInfo, companyInfo, additionalD
 	console.log('ranchRef Utils', ranchSnapshot);
 
 	if(!ranchSnapshot.exists) {
-		const createdAt = new Date();
-		const {name, ranchId, code, crop, area, seasonStart, seasonEnd, latitude, longitude, address } = ranchInfo;
+		const createdAt = new Date();		
 
 		try {
 			await ranchRef.set({
-				name, 
-				ranchId,
 				companyId,
-				code, 
-				crop, 
-				area, 
-				seasonStart, 
-				seasonEnd, 
-				latitude, 
-				longitude, 
-				address,
 				createdAt,
+				...ranchInfo,
 				...additionalData
 			})
 		} catch (error) {
@@ -160,7 +145,7 @@ export const addSectorDocumentInRanch = async (sectorInfo, ranchData) => {
 	const { companyId, ranchId } = ranchData;
 	const sectorCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/sectors`);
 	const sectorRef = sectorCollectionRef.doc();
-	const sectorSnapshot = sectorRef.get();
+	const sectorSnapshot = await sectorRef.get();
 
 	//console.log('sector snapshot', sectorSnapshot);
 	if(!sectorSnapshot.exists) {
@@ -191,9 +176,9 @@ export const addSectorDocumentInRanch = async (sectorInfo, ranchData) => {
 
 export const getRanchesfromCompany = async (company) => {
 	if (company) {
-		const ranchCollectionRef = await firestore.collection(`companies/${company.id}/ranchs`);
+		const ranchCollectionRef = firestore.collection(`companies/${company.id}/ranchs`);
 		const ranchCollectionSnapshot = await ranchCollectionRef.get();
-		const allRanchesDocs = await ranchCollectionSnapshot.docs;
+		const allRanchesDocs = ranchCollectionSnapshot.docs;
 		
 		//console.log('getranch utils', actualRanchDocs.map(doc => doc.data().name));
 		return allRanchesDocs;
@@ -203,41 +188,38 @@ export const getRanchesfromCompany = async (company) => {
 export const getSectorsFromRanch = async (ranch) => {
 	if (!ranch) return;
 
-	const sectorsCollectionRef = await firestore.collection(`companies/${ranch.companyId}/ranchs/${ranch.ranchId}/sectors`);
+	const sectorsCollectionRef = firestore.collection(`companies/${ranch.companyId}/ranchs/${ranch.ranchId}/sectors`);
 	const sectorsCollectionSnapshot = await sectorsCollectionRef.get();
-	const allSectorsDocs = await sectorsCollectionSnapshot.docs;
+	const allSectorsDocs = sectorsCollectionSnapshot.docs;
 
 	return allSectorsDocs;
 }
 
 export const getCropsForSelect = async () => {
-	const cropsRef = await firestore.collection('crops');
+	const cropsRef = firestore.collection('crops');
 	const cropsSnapshot = await cropsRef.get();
-	const allCrops = await cropsSnapshot.docs;
+	const allCrops = cropsSnapshot.docs;
 	return allCrops;
 }
 
-export const createInspectionDocumentInRanch = async (inspection, sectorData, inspector) => {
+export const createInspectionDocumentInRanch = async (inspection, sectorInfo, inspector) => {
 	console.log('firebase inspection', inspection);
-	console.log('sector', sectorData);
+	console.log('sector', sectorInfo);
 	console.log('inspector', inspector)
-	const { sector, companyId, ranchId } = sectorData
+	const { sector, companyId, ranchId } = sectorInfo
 	const inspectionCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/inspection`);
 	const inspectionRef = inspectionCollectionRef.doc();
 	const inspectionSnapshot = await inspectionRef.get();
 
 	if(!inspectionSnapshot.exists) {
-		const createdAt = new Date();
-		const { inspectionDate, records, sample } = inspection		
+		const createdAt = new Date();			
 
 		try {
 			await inspectionRef.set({
 				createdAt,
 				inspector,
-				inspectionDate,
-				records,
-				sample,
-				sector
+				sector,
+				...inspection
 			})
 		}
 		catch (error) {
@@ -246,6 +228,30 @@ export const createInspectionDocumentInRanch = async (inspection, sectorData, in
 	}
 
 	return inspectionRef;
+}
+
+export const createRegisterDocInRanch = async (collection, registerData, sectorInfo, inspector) => {
+	const createdAt = new Date();	//evaluate to add the register time instead
+	const parsedDate = Date.parse(createdAt);
+	const { sector, companyId, ranchId } = sectorInfo;
+	const registerCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/${collection}`);
+	const registerRef = registerCollectionRef.doc(`${parsedDate}`);
+	const registerSnapshot = await registerRef.get();
+
+	if(!registerSnapshot.exists) {
+		try {
+			await registerRef.set({
+				createdAt,
+				inspector,
+				sector,
+				...registerData
+			})
+		} catch (error) {
+			console.log('error creating document', error.message)
+		}
+	}
+
+	return registerRef;
 }
 
 firebase.initializeApp(firebaseConfig);

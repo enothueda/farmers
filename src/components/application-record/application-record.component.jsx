@@ -1,7 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+
+import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
+import { selectCurrentSector } from '../../redux/sector/sector.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './application-record.styles.scss';
 
@@ -9,12 +14,42 @@ class ApplicationRecord extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			date: ''
-
+			date: '',
+                startTime: '',
+                endTime: '',
+                product: '',
+                ingredient: '',
+                equipment: '',
+                dose: '',
+                volume: '',
+                pest: '',
+                interval: '',
+                reentry: ''
 		}
 	}
 
 	handleSubmit = event => {
+        event.preventDefault();
+        const { currentSector, currentUser } = this.props;
+        
+        if(currentSector) {
+            createRegisterDocInRanch('applications', this.state, currentSector, currentUser.id);
+            this.setState({
+                date: '',
+                startTime: '',
+                endTime: '',
+                product: '',
+                ingredient: '',
+                equipment: '',
+                dose: '',
+                volume: '',
+                pest: '',
+                interval: '',
+                reentry: ''
+            })
+        } else {
+            console.log('SELECT A SECTOR')
+        }
 
 	}
 
@@ -135,4 +170,9 @@ class ApplicationRecord extends React.Component {
 
 }
 
-export default ApplicationRecord;
+const mapStateToProps = state => ({
+	currentSector: selectCurrentSector(state),
+	currentUser: selectCurrentUser(state)
+});
+
+export default connect(mapStateToProps)(ApplicationRecord);

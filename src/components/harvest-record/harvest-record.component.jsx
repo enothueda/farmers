@@ -1,7 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+
+import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
+import { selectCurrentSector } from '../../redux/sector/sector.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './harvest-record.styles.scss';
 
@@ -9,12 +14,30 @@ class HarvestRecord extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			date: ''
-
+            record: '',
+            date: '',
+            startTime: '',
+            product: '',
+            quantity: ''
 		}
 	}
 
 	handleSubmit = event => {
+        event.preventDefault();
+        const { currentSector, currentUser } = this.props;
+
+        if(currentSector) {
+            createRegisterDocInRanch('harvest', this.state, currentSector, currentUser.id);
+            this.setState({
+                record: '',
+                date: '',
+                startTime: '',
+                product: '',
+                quantity: ''
+            })
+        } else {
+            console.log('SELECT A SECTOR')
+        }
 
 	}
 
@@ -32,7 +55,7 @@ class HarvestRecord extends React.Component {
                         type='text'
                         name='record'
                         label='Record'
-                        placeholder='Id, Tag, Record, Number'
+                        placeholder='Id / Tag / Record / Number'
                         value={this.state.ingredient}
                         onChange={this.handleChange}
                         required
@@ -82,4 +105,9 @@ class HarvestRecord extends React.Component {
 
 };
 
-export default HarvestRecord;
+const mapStateToProps = state => ({
+	currentSector: selectCurrentSector(state),
+	currentUser: selectCurrentUser(state)
+});
+
+export default connect(mapStateToProps)(HarvestRecord);

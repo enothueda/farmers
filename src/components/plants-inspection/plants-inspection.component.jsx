@@ -10,7 +10,7 @@ import { selectInspectionRecords } from '../../redux/inspection/inspection.selec
 import { selectCurrentSector } from '../../redux/sector/sector.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { setInspection } from '../../redux/inspection/inspection.actions';
-import { createInspectionDocumentInRanch } from '../../firebase/firebase.utils';
+import { createInspectionDocumentInRanch, createRegisterDocInRanch } from '../../firebase/firebase.utils';
 
 import './plants-inspection.styles.scss';
 
@@ -35,8 +35,8 @@ class PlantsInspection extends React.Component {
 			records
 		}
 
-		if (currentSector ) {
-			createInspectionDocumentInRanch(fullInspection, currentSector, currentUser.id);
+		if (currentSector) {
+			createRegisterDocInRanch('inspections', fullInspection, currentSector, currentUser.id);
 			setInspection(fullInspection);
 			this.setState({inspectionDate: '', sample: ''})
 		} else {
