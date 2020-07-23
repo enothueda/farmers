@@ -9,26 +9,19 @@ const Inventory = () => (
         <h1>Inventory</h1>
 
         <h3>Warehouse Inventory</h3>
-            <div>Product</div>
-            <div>Quantity</div>
-            <div>Measurement Unit (default)</div>
+            <span>Product</span>
+            <span> / Quantity / </span>
+            <span>Measurement Unit (default)</span>
           
         <h3>Add a Warehouse</h3>
         <AddWarehouse />
 
         <h3>Add a Product</h3>
-        <AddNewProduct />
-            <div>ID o code</div>
+        <AddNewProduct />           
         
         <h3>Inventory Management</h3>
         <InventoryManagement />
-            <div>Date</div>
-            <div>Product (list)</div>
-            <div>Movement (In/out)</div>
-            <div>Quantity</div>
-            <div>Measurement Unit (default)</div>
-
-        
+                    
     </div>
 );
 
