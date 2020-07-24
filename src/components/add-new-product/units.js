@@ -1,8 +1,8 @@
 const units = [
-    'L (liters)',
+    'L (litres)',
     'kg (kilograms)',
-    'm (meters)',
-    'piece'
+    'm (metres)',
+    'pieces'
 ];
 
 export default units;

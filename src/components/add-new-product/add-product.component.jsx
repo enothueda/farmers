@@ -1,31 +1,46 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import CustomSelect from '../custom-select/custom-select.component';
 
+import { createNewDocInCompanySubcollection } from '../../firebase/firebase.utils';
+
 import units from './units.js';
 import './add-product.styles.scss';
+import { selectCurrentCompany } from '../../redux/company/company.selectors';
 
 class AddNewProduct extends React.Component {
     constructor() {
         super();
         this.state = {
-            id: '',
+            code: '',
             product: '',
             maker: '',
             presentation: '',
-            unit: '',
-            quantity: ''
+            unit: ''
         }
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
+        const { company } = this.props;
+        event.preventDefault();
+        console.log(this.state);
+        await createNewDocInCompanySubcollection('products', company.id, this.state);
+        this.setState({
+            code: '',
+            product: '',
+            maker: '',
+            presentation: '',
+            unit: ''
+        })
 
     }
 
     handleChange = event => {
-
+        const {name, value} = event.target;
+    	this.setState({ [name]: value});
     }
 
     render() {
@@ -34,10 +49,10 @@ class AddNewProduct extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'
-                        name='id'
+                        name='code'
                         label='ID / Code'
                         placeholder='code or identifier'
-                        value={this.state.id}
+                        value={this.state.productId}
                         onChange={this.handleChange}
                     />
                     <FormInput 
@@ -66,20 +81,11 @@ class AddNewProduct extends React.Component {
                         value={this.state.presentation}
                         onChange={this.handleChange}
                         required
-                    />
-                    <FormInput // change to select option
-                        type='text'
-                        name='unit'
-                        label='Unit of Measurement'
-                        placeholder='L, kg, m, piece, etc'
-                        value={this.state.unit}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <CustomSelect>
-                        <option>---</option>
+                    />                     
+                    <CustomSelect label='Unit' name='unit' onChange={this.handleChange}>
+                        <option>select unit</option>
                         {
-                            units.map(unit => <option>{unit}</option>)
+                            units.map((unit, idx) => <option key={idx}>{unit}</option>)
                         }
                     </CustomSelect>            
                     <CustomButton type='submit'>Add Product</CustomButton>
@@ -89,4 +95,8 @@ class AddNewProduct extends React.Component {
     }
 };
 
-export default AddNewProduct;
+const mapStateToProps = state => ({
+    company: selectCurrentCompany(state)
+})
+
+export default connect(mapStateToProps)(AddNewProduct);

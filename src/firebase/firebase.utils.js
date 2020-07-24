@@ -146,6 +146,27 @@ export const createNewRanchDocument = async (ranchInfo, companyInfo, additionalD
 
 	return ranchRef;
 }
+export const createNewDocInCompanySubcollection = async (subcollection, companyId, data, additionalData) => {
+	if(!subcollection || !companyId || !data) return;
+
+	const subCollectionRef = firestore.collection(`companies/${companyId}/${subcollection}`)
+	const docRef = subCollectionRef.doc();
+	const docSnapshot = await docRef.get();
+
+	if(!docSnapshot.exists) {
+		const createdAt = new Date();
+
+		try {
+			docRef.set({
+				createdAt,
+				...data,
+				...additionalData
+			})
+		} catch (error) {
+			console.log('error creating subcollection', error.message)
+		}
+	}
+}
 
 //has to be placed the current ranch (last) into the User Doc {ranch: ranchId}?
 
@@ -195,6 +216,16 @@ export const getRanchesfromCompany = async (company) => {
 	}		
 }
 
+export const getSubCollectionsFromCompany = async(collection, companyId) => {
+	if(!collection || !companyId) return;
+
+	const subCollectionRef = firestore.collection(`companies/${companyId}/${collection}`);
+	const subCollectionSnapshot = await subCollectionRef.get();
+	const subCollectionDocs = subCollectionSnapshot.docs;
+
+	return subCollectionDocs;
+}
+
 export const getSectorsFromRanch = async (ranch) => {
 	if (!ranch) return;
 
@@ -212,6 +243,7 @@ export const getCropsForSelect = async () => {
 	return allCrops;
 }
 
+//This next function was replaced by createRegisterDocInRanch
 export const createInspectionDocumentInRanch = async (inspection, sectorInfo, inspector) => {
 	console.log('firebase inspection', inspection);
 	console.log('sector', sectorInfo);

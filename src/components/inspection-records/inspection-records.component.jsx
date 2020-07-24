@@ -24,7 +24,7 @@ const InspectionRecords = ({records}) => (
 		{
 			records.map((record, index) => 
 				<div key={index} className='record-data'>
-					<span className='data'>{Object.keys(record)[0].toUpperCase()}</span>
+					<span className='data'>{Object.keys(record)[2].toUpperCase()}</span>
 					<div className='data'>
 						<span className='pest'>{record.pests}</span>
 						<span className='disease'>{record.diseases}</span>

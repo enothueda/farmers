@@ -13,19 +13,27 @@ class InspectionDisplay extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {			
-			incidence: '',
-			data: {}
+			
+			data: {
+				incidence: '',
+				quantity: ''
+			}
 		}
 	}
 
 	handleSubmit = event => {
-		const { addRecord } = this.props;
-		const { name } = event.target;
+		const { addRecord } = this.props;		
 		event.preventDefault();
 		// To add a ternary with currentSector ? addRecord... : select a sector
+		console.log(this.state)
 		addRecord(this.state.data);
 		// this is try to clean all data from select, has to check the value with ternary
-		this.setState({ incidence: '' })
+		this.setState({
+			data: {
+				incidence: '',
+				quantity: ''
+			}
+		});
 
 	}
 
@@ -53,10 +61,10 @@ class InspectionDisplay extends React.Component {
 						<option>Select {group}</option>
 						{	
 							group === 'pests' ?
-							pests.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>) :
+							pests.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>) :
 								group === 'diseases' ?
-								diseases.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>) :
-								beneficials.map((entity, idx) => <option key={idx} value={entity ? entity : ''}>{entity}</option>)
+								diseases.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>) :
+								beneficials.map((entity, idx) => <option key={idx} value={entity}>{entity}</option>)
 						}
 					</CustomSelect>
 
@@ -66,11 +74,12 @@ class InspectionDisplay extends React.Component {
 						name='quantity'
 						placeholder='Quantity per spot'
 						label='Quantity'
+						value={this.state.data.quantity}
 						onChange={this.handleChange}						
 					/>
 
-					<CustomSelect className='inspection-level' name='incidence' onChange={this.handleChange}>
-						<option value=''>Incidence Level</option>
+					<CustomSelect className='inspection-level' name='incidence' value={this.state.data.incidence} onChange={this.handleChange}>
+						<option value='' >Incidence Level</option>
 						<option value='1' >Level 1</option>
 						<option value='2' >Level 2</option>
 						<option value='3' >Level 3</option>

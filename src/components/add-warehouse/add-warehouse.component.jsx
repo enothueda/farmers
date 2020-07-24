@@ -1,7 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+
+import { createNewDocInCompanySubcollection } from '../../firebase/firebase.utils';
+import { selectCurrentCompany } from '../../redux/company/company.selectors';
 
 import './add-warehouse.styles.scss';
 
@@ -9,18 +13,27 @@ class AddWarehouse extends React.Component {
     constructor() {
         super();
         this.state = {
-            id: '',
+            whId: '',
             warehouse: '',
             location: ''
         }
     }
 
     handleSubmit = event => {
+        const { company } = this.props;
+        event.preventDefault()
+        createNewDocInCompanySubcollection('warehouses', company.id, this.state);
+        this.setState({
+            whId: '',
+            warehouse: '',
+            location: ''
+        })
 
     }
 
     handleChange = event => {
-
+        const {name, value} = event.target;
+    	this.setState({ [name]: value});
     }
 
     render() {
@@ -29,10 +42,10 @@ class AddWarehouse extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'
-                        name='id'
+                        name='whId'
                         label='ID / Code'
                         placeholder='Identifier or Code'
-                        value={this.state.id}
+                        value={this.state.whId}
                         onChange={this.handleChange}
                     />
                     <FormInput 
@@ -60,4 +73,8 @@ class AddWarehouse extends React.Component {
     }
 };
 
-export default AddWarehouse;
+const mapStateToProps = state => ({
+    company: selectCurrentCompany(state)
+})
+
+export default connect(mapStateToProps)(AddWarehouse);
