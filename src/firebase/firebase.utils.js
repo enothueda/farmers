@@ -3,7 +3,17 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = 'YOUR API AND IFO HERE'
+const firebaseConfig = {
+	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
+	authDomain: "farmers-db.firebaseapp.com",
+	databaseURL: "https://farmers-db.firebaseio.com",
+	projectId: "farmers-db",
+	storageBucket: "farmers-db.appspot.com",
+	messagingSenderId: "249695488238",
+	appId: "1:249695488238:web:92ccf8542676237589cbff",
+	measurementId: "G-8CSMG7VZCB"
+};
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
 
@@ -305,7 +315,7 @@ export const createInventoryMovement = async (company, user, movement, additiona
 	
 	const storage = {}
 	storage[`inventory.${movement.product}`] = actualQuantity
-
+	
 	if(!movementSnapshot.exists) {
 		try {
 			const userId = user.id
