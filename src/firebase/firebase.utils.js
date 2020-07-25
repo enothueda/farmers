@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = 'YOUR API KEY AND INFO HERE'
+const firebaseConfig = 'YOUR API AND IFO HERE'
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
 
@@ -48,6 +48,9 @@ export const createCompanyProfileDocument = async (companyProfile, currentUser, 
 		});
 
 		try {
+			const users = {}
+			users[userCreator] = 'admin';
+
 			await companyRef.set({
 				companyName,
 				country,
@@ -55,11 +58,7 @@ export const createCompanyProfileDocument = async (companyProfile, currentUser, 
 				address,
 				logo,
 				companyCreatedAt,
-				roles: {
-					admin: [userCreator],
-					manager: [],
-					inspector: []
-				},
+				users,
 				...additionalData
 			})	
 		} catch (error) {
@@ -284,6 +283,50 @@ export const createRegisterDocInRanch = async (collection, registerData, sectorI
 	}
 
 	return registerRef;
+}
+export const createInventoryMovement = async (company, user, movement, additionalData) => {
+	console.log('fire move', movement);
+	// add the if statement for evaluate data before
+	const createdAt = new Date();	//evaluate to add the register time instead
+	const parsedDate = Date.parse(createdAt);
+	const moveCollectionRef = firestore.collection(`companies/${company.id}/warehouses/${movement.warehouse}/movements`);
+	const warehouseRef = firestore.doc(`companies/${company.id}/warehouses/${movement.warehouse}`);
+	const warehouseSnapshot = await warehouseRef.get()
+	const warehouseData = warehouseSnapshot.data();
+	const movementRef = moveCollectionRef.doc(`${parsedDate}`)
+	const movementSnapshot = await movementRef.get();
+	console.log('fire data', warehouseData)
+
+	const previousQuantity = warehouseData.inventory[movement.product]
+	
+	const actualQuantity = previousQuantity 
+							? movement.move === 'input' ? previousQuantity + movement.quantity : previousQuantity - movement.quantity
+							: movement.quantity	
+	
+	const storage = {}
+	storage[`inventory.${movement.product}`] = actualQuantity
+
+	if(!movementSnapshot.exists) {
+		try {
+			const userId = user.id
+			const userName = user.displayName
+			
+			await warehouseRef.update(storage)
+	
+			await movementRef.set({
+				createdAt,
+				userId,
+				userName,
+				...movement,
+				...additionalData
+	
+			});
+
+		} catch (error) {
+			console.log('error on register inventory movement', error.message)
+		}
+
+	}
 }
 
 firebase.initializeApp(firebaseConfig);

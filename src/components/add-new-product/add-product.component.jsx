@@ -52,7 +52,7 @@ class AddNewProduct extends React.Component {
                         name='code'
                         label='ID / Code'
                         placeholder='code or identifier'
-                        value={this.state.productId}
+                        value={this.state.code}
                         onChange={this.handleChange}
                     />
                     <FormInput 

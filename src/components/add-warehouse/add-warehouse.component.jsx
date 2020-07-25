@@ -22,7 +22,7 @@ class AddWarehouse extends React.Component {
     handleSubmit = event => {
         const { company } = this.props;
         event.preventDefault()
-        createNewDocInCompanySubcollection('warehouses', company.id, this.state);
+        createNewDocInCompanySubcollection('warehouses', company.id, {inventory: {}, ...this.state});
         this.setState({
             whId: '',
             warehouse: '',

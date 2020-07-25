@@ -9,6 +9,7 @@ import sectorReducer from './sector/sector.reducer';
 import inspectionReducer from './inspection/inspection.reducer';
 import cropsReducer from './crops/crops.reducer';
 import cropReducer from './crop/crop.reducer';
+import inventoryReducer from './inventory/inventory.reducer';
 
 const persistConfig = {
 	key: 'root',
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
 	sector: sectorReducer,
 	inspection: inspectionReducer,
 	crops: cropsReducer,
-	crop: cropReducer
+	crop: cropReducer,
+	inventory: inventoryReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CustomButton from '../custom-button/custom-button.component';
-
 import { setCurrentRanch } from '../../redux/ranch/ranch.actions';
 import { setCurrentCrop } from '../../redux/crop/crop.actions';
 import { selectCropsInfo } from '../../redux/crops/crops.selectors';

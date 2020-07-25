@@ -19,7 +19,7 @@ const InspectionReducer = (state = INITIAL_STATE, action) => {
 				records: []
 			}
 		default:
-			return state
+			return state;
 	}
 }
 
