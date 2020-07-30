@@ -149,7 +149,7 @@ class ApplicationRecord extends React.Component {
                         name='interval'
                         label='Interval'
                         placeholder='Safety Interval'
-                        value={this.state.dose}
+                        value={this.state.interval}
                         onChange={this.handleChange}
                         required
                     /> 
@@ -158,7 +158,7 @@ class ApplicationRecord extends React.Component {
                         name='reentry'
                         label='Re-entry Period'
                         placeholder='Safety Time for worker to can entry'
-                        value={this.state.dose}
+                        value={this.state.reentry}
                         onChange={this.handleChange}
                         required
                     /> 
