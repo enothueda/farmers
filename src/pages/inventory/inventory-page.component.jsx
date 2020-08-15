@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import AddWarehouse from '../../components/add-warehouse/add-warehouse.component';
 import AddNewProduct from '../../components/add-new-product/add-product.component';
 import InventoryManagement from '../../components/inventory-mgmt/inventory-mgmt.component';
+import InventoryDetails from '../../components/inventory-details/inventory-details.component';
 
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
 import { setWarehouses,setProducts } from '../../redux/inventory/inventory.actions';
 import { getSubCollectionsFromCompany } from '../../firebase/firebase.utils';
+import { selectWarehouses } from '../../redux/inventory/inventory.selectors';
 
 class Inventory extends React.Component {
 
@@ -22,25 +24,30 @@ class Inventory extends React.Component {
         }
     }
 
-    render() {        
+    render() {       
+        const { warehouses }  = this.props
         return (
             <div className='inventory'>
                 <h1>Inventory</h1>
-        
-                <h3>Warehouse Inventory</h3>
+
+                <h2>Warehouse Inventory</h2>
+                {
+                    warehouses
+                    ? warehouses.map(shed => <InventoryDetails key={shed.id} shed={shed}/>)
+                    : null
+                }
                     <span>Product</span>
                     <span> / Quantity / </span>
-                    <span>Measurement Unit (default)</span>
-                  
-                <h3>Add a Warehouse</h3>
-                <AddWarehouse />
-        
-                <h3>Add a Product</h3>
-                <AddNewProduct />           
-                
-                <h3>Inventory Management</h3>
-                <InventoryManagement />
-                            
+                    <span>Measurement Unit (default)</span>                    
+                    
+                    <h3>Inventory Management</h3>
+                    <InventoryManagement />
+                    
+                    <h3>Add a Product</h3>
+                    <AddNewProduct />
+
+                    <h3>Add a Warehouse</h3>
+                    <AddWarehouse />
             </div>
         );
     }
@@ -48,7 +55,8 @@ class Inventory extends React.Component {
 
 
 const mapStateToProps = state => ({
-    company: selectCurrentCompany(state)
+    company: selectCurrentCompany(state),
+    warehouses: selectWarehouses(state)
 });
 
 const mapDispatchToProps = dispatch => ({
