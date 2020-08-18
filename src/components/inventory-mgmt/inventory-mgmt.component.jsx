@@ -8,7 +8,8 @@ import CustomButton from '../custom-button/custom-button.component';
 import { selectProducts, selectWarehouses } from '../../redux/inventory/inventory.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
-import { createInventoryMovement } from '../../firebase/firebase.utils';
+import { createInventoryMovement, getSubCollectionsFromCompany } from '../../firebase/firebase.utils';
+import { setWarehouses, setProducts } from '../../redux/inventory/inventory.actions';
 
 import './inventory-mgmt.styles.scss';
 
@@ -24,10 +25,18 @@ class InventoryManagement extends React.Component {
         }
     }
 
-    handleSubmit = event => {
-        const { currentUser, currentCompany } = this.props
+    handleSubmit = async event => {
+        const { currentUser, company, setProducts, setWarehouses } = this.props
         event.preventDefault();
-        createInventoryMovement(currentCompany, currentUser, this.state);
+        await createInventoryMovement(company, currentUser, this.state);
+
+        if(company) {
+            getSubCollectionsFromCompany('warehouses', company.id)
+            .then(response => setWarehouses(response.map(shed => ({id: shed.id, ...shed.data()}))));
+
+            getSubCollectionsFromCompany('products', company.id)
+            .then(response => setProducts(response.map(product => ({id: product.id, ...product.data()}))))
+        }
 
         this.setState({
             warehouse:'',
@@ -105,7 +114,12 @@ const mapStateToProps = state => ({
     products: selectProducts(state),
     warehouses: selectWarehouses(state),
     currentUser: selectCurrentUser(state),
-    currentCompany: selectCurrentCompany(state)
+    company: selectCurrentCompany(state)
+});
+
+const mapDispatchToProps = dispatch => ({
+    setWarehouses: warehouses => dispatch(setWarehouses(warehouses)),
+    setProducts: products => dispatch(setProducts(products))
 })
 
-export default connect(mapStateToProps)(InventoryManagement);
+export default connect(mapStateToProps, mapDispatchToProps)(InventoryManagement);
