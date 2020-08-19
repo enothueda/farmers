@@ -60,7 +60,6 @@ class AddRanch extends React.Component {
 
     	return (
     		<div className='add-ranch'>
-                <h3>Add Ranch</h3>
                 <form onSubmit={this.handleSubmit}>                    
                     <FormInput 
                         type='text'

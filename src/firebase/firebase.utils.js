@@ -301,8 +301,8 @@ export const createInventoryMovement = async (company, user, movement, additiona
 	const previousQuantity = warehouseData.inventory[movement.product]
 	
 	const actualQuantity = previousQuantity 
-							? movement.move === 'input' ? previousQuantity + movement.quantity : previousQuantity - movement.quantity
-							: movement.quantity	
+							? movement.move === 'input' ? previousQuantity + movement.quantity * 1 : previousQuantity - movement.quantity * 1
+							: movement.quantity	* 1
 	
 	const storage = {}
 	storage[`inventory.${movement.product}`] = actualQuantity

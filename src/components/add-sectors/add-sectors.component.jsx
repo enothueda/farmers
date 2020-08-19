@@ -51,7 +51,6 @@ class AddSectors extends React.Component {
 	render() {
 		return (
 			<div className='add-sectors'>
-                <h3>Add Sector</h3>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'

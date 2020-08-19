@@ -5,11 +5,15 @@ import AddWarehouse from '../../components/add-warehouse/add-warehouse.component
 import AddNewProduct from '../../components/add-new-product/add-product.component';
 import InventoryManagement from '../../components/inventory-mgmt/inventory-mgmt.component';
 import InventoryDetails from '../../components/inventory-details/inventory-details.component';
+import WithForm from '../../components/with-form/with-form.component';
 
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
 import { setWarehouses,setProducts } from '../../redux/inventory/inventory.actions';
 import { getSubCollectionsFromCompany } from '../../firebase/firebase.utils';
 import { selectWarehouses } from '../../redux/inventory/inventory.selectors';
+
+const ProductWithForm = WithForm(AddNewProduct);
+const WarehouseWithForm = WithForm(AddWarehouse)
 
 class Inventory extends React.Component {
 
@@ -42,12 +46,10 @@ class Inventory extends React.Component {
                     
                     <h3>Inventory Management</h3>
                     <InventoryManagement />
-                    
-                    <h3>Add a Product</h3>
-                    <AddNewProduct />
 
-                    <h3>Add a Warehouse</h3>
-                    <AddWarehouse />
+                    <ProductWithForm  title='Add a Product' />
+
+                    <WarehouseWithForm title='Add a Warehouse'/>
             </div>
         );
     }

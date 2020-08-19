@@ -1,0 +1,10 @@
+.form-show {
+    
+    .title {
+        cursor: pointer;
+
+        &:hover {
+            font-size: 1.25em;
+        }
+    }
+}

@@ -21,7 +21,7 @@ class InventoryManagement extends React.Component {
             move: '',
             product: '',
             date: '',
-            quantity: ''
+            quantity: 0
         }
     }
 
@@ -43,7 +43,7 @@ class InventoryManagement extends React.Component {
             move: '',
             product: '',
             date: '',
-            quantity: ''
+            quantity: 0
         })
     }
 
@@ -57,7 +57,7 @@ class InventoryManagement extends React.Component {
         return (
             <div className='inventory-mgmt'>
                 <form onSubmit={this.handleSubmit}>
-                    <CustomSelect name='warehouse' onChange={this.handleChange} >
+                    <CustomSelect name='warehouse' onChange={this.handleChange} value={this.state.warehouse}>
                         <option>select warehouse</option>
                         {
                             warehouses
@@ -68,13 +68,13 @@ class InventoryManagement extends React.Component {
                         }
                     </CustomSelect>
 
-                    <CustomSelect name='move' onChange={this.handleChange}>
+                    <CustomSelect name='move' onChange={this.handleChange} value={this.state.move}>
                         <option>Move</option>
-                        <option>Input</option>
-                        <option>Output</option>
+                        <option>input</option>
+                        <option>output</option>
                     </CustomSelect>
                     
-                    <CustomSelect name='product' onChange={this.handleChange}>
+                    <CustomSelect name='product' onChange={this.handleChange} value={this.state.product}>
                         <option>select product</option>
                         {
                             products

@@ -7,11 +7,16 @@ import ActualRanch from '../../components/actual-ranch/actual-ranch.component';
 import RanchSelect from '../../components/ranch-select/ranch-select.component';
 import ActualSector from '../../components/actual-sector/actual-sector.component';
 import SectorSelect from '../../components/sector-select/sector-select.component';
+import WithForm from '../../components/with-form/with-form.component';
 
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
 import { selectCurrentRanch }  from '../../redux/ranch/ranch.selectors';
 import { setAllRanches, clearRanchesData } from '../../redux/ranch/ranch.actions';
 import { getRanchesfromCompany } from '../../firebase/firebase.utils';
+
+const RanchWithForm = WithForm(AddRanch);
+const SectorsWithForm = WithForm(AddSectors);
+
 
 class Ranchs extends React.Component {
     componentDidMount() {
@@ -40,14 +45,12 @@ class Ranchs extends React.Component {
                     <span> Settings </span>            
                 </div>
                 {
-                    currentCompany ?
-                    <AddRanch /> :
-                    <h4>Please Add or Select a Company</h4>
+                    currentCompany
+                    ? <RanchWithForm title='Add a Ranch'/> 
+                    : <h4>Please Add or Select a Company</h4>
                 }
                 {
-                    currentRanch ?
-                    <AddSectors /> :
-                    ''
+                    currentRanch && <SectorsWithForm title='Add Sector' /> 
                 }
                                  
             </div>
