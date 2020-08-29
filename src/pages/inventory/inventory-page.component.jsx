@@ -39,10 +39,7 @@ class Inventory extends React.Component {
                     warehouses
                     ? warehouses.map(shed => <InventoryDetails key={shed.id} shed={shed}/>)
                     : null
-                }
-                    <span>Product</span>
-                    <span> / Quantity / </span>
-                    <span>Measurement Unit (default)</span>                    
+                }           
                     
                     <h3>Inventory Management</h3>
                     <InventoryManagement />

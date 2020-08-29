@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { setCurrentSector } from '../../redux/sector/sector.actions';
+import { setCurrentSector } from '../../redux/ranch/ranch.actions';
 
 import './sector-options.styles.scss';
 

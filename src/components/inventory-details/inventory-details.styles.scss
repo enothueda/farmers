@@ -1,0 +1,41 @@
+.inventory-details {
+	width: 60%;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto 0;
+
+    @media screen and (max-width: 800px) {
+        width: 85%;
+    }
+
+	.records-header {
+		width: 100%;
+        height: 40px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid darkgrey;
+
+        .record-block {
+            text-transform: capitalize;      
+            font-style: italic;
+            font-weight: bolder;          
+            width: 25%;
+            font-size: 1.2em;
+        }
+    }
+
+    .inventory-data {
+        width: 100%;
+       display: flex;
+       min-height: 10px;
+       border-bottom: 1px solid darkgrey;
+       padding: 15px 0;
+       font-size: 20px;
+       align-items: center;
+
+       .data {
+           width: 25%;
+       }
+    }
+}

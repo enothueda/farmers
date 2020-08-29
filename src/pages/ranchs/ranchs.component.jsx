@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import AddRanch from '../../components/add-ranch/add-ranch.component';
 import AddSectors from '../../components/add-sectors/add-sectors.component';
 import ActualRanch from '../../components/actual-ranch/actual-ranch.component';
-import RanchSelect from '../../components/ranch-select/ranch-select.component';
 import ActualSector from '../../components/actual-sector/actual-sector.component';
-import SectorSelect from '../../components/sector-select/sector-select.component';
 import WithForm from '../../components/with-form/with-form.component';
 
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
@@ -34,15 +32,10 @@ class Ranchs extends React.Component {
             <div>
                 <h1>Ranch Setup</h1>                
                 <div>
-                    <ActualRanch />                    
-                    <RanchSelect />
+                    <ActualRanch />
 
-                    <ActualSector />
-                    <SectorSelect />        
-                    <br />
-                    <span> Ranch | </span>
-                    <span> Sectors | </span>
-                    <span> Settings </span>            
+                    <ActualSector />      
+                    <br />        
                 </div>
                 {
                     currentCompany

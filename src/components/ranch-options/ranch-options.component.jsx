@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { setCurrentRanch } from '../../redux/ranch/ranch.actions';
 import { setCurrentCrop } from '../../redux/crop/crop.actions';
 import { selectCropsInfo } from '../../redux/crops/crops.selectors';
-import { setAllSectors} from '../../redux/sector/sector.actions';
-import { selectCurrentRanch } from '../../redux/ranch/ranch.selectors';
+import { setAllSectors} from '../../redux/ranch/ranch.actions';
 import { getSectorsFromRanch } from '../../firebase/firebase.utils';
 
 import './ranch-options.styles.scss';
 
-const RanchOptions = ({ranch, setCurrentRanch, cropsInfo, setCurrentCrop, currentRanch, setAllSectors}) => {
+const RanchOptions = ({ranch, setCurrentRanch, cropsInfo, setCurrentCrop, setAllSectors}) => {
 	const currentCrop = cropsInfo.find(crop => ranch.crop === crop.name);
 
 	return(
@@ -32,8 +31,7 @@ const RanchOptions = ({ranch, setCurrentRanch, cropsInfo, setCurrentCrop, curren
 };
 
 const mapStateTopProps = state => ({
-	cropsInfo: selectCropsInfo(state),
-	currentRanch: selectCurrentRanch(state)
+	cropsInfo: selectCropsInfo(state)
 })
 
 const mapDispatchToProps = dispatch => ({

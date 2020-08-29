@@ -1,4 +1,0 @@
-export const SectorActionTypes = {
-	SET_CURRENT_SECTOR: 'SET_CURRENT_SECTOR',
-	SET_ALL_SECTORS: 'SET_ALL_SECTORS'
-}

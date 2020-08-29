@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SectorOptions from '../sector-options/sector-options.component';
-import { selectAllSectors } from '../../redux/sector/sector.selectors';
+import { selectAllSectors } from '../../redux/ranch/ranch.selectors';
 
 import './sector-select.styles.scss';
 
@@ -27,9 +27,9 @@ const SectorSelect = ({ allSectors }) => {
                 </div>               
             </div>            
             {
-               allSectors ?
-               allSectors.map(sector => <SectorOptions key={sector.sector} sector={sector} />) :
-               <h3>SELECT A RANCH</h3>
+               allSectors 
+               ? allSectors.map(sector => <SectorOptions key={sector.sector} sector={sector} />) 
+               : <h3>SELECT A RANCH</h3>
             }           
         </div>
 

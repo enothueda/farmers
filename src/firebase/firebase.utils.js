@@ -3,16 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = {
-	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
-	authDomain: "farmers-db.firebaseapp.com",
-	databaseURL: "https://farmers-db.firebaseio.com",
-	projectId: "farmers-db",
-	storageBucket: "farmers-db.appspot.com",
-	messagingSenderId: "249695488238",
-	appId: "1:249695488238:web:92ccf8542676237589cbff",
-	measurementId: "G-8CSMG7VZCB"
-};
+const firebaseConfig = 'YOUR API AND INFO HERE'
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -113,12 +104,26 @@ export const getCompanyIdFromUser = async (user, additionalData) => {
 	return	
 }
 
-export const getCompanyInfoFromId = (companyId, additionalData) => {
-	if(!companyId) return;
+export const getCompanyInfoFromId = async (companyId, userId, additionalData) => {
+	if(!companyId || !userId) return;
 
 	const companyRef = firestore.doc(`companies/${companyId}`);
+	const companySnapShot = await companyRef.get();
+	const companyData = {id: companySnapShot.id, ...companySnapShot.data()}
+	
+	const role = companyData.users[userId]
+	const { address, companyName, country, id, location, logo } = companyData;
+	const companyInfo = {
+		address,
+		companyName,
+		country,
+		id,
+		location,
+		logo,
+		role
+	}
 
-	return companyRef;
+	return companyInfo;
 }
 
 export const createNewRanchDocument = async (ranchInfo, companyInfo, additionalData) => {

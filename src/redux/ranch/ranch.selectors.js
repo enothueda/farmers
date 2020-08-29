@@ -11,3 +11,13 @@ export const selectAllRanches = createSelector(
 	[selectRanch],
 	ranches => ranches.allRanches
 );
+
+export const selectCurrentSector = createSelector(
+	[selectRanch],
+	sector => sector.currentSector
+);
+
+export const selectAllSectors = createSelector(
+	[selectRanch],
+	sector => sector.allSectors
+)

@@ -9,15 +9,15 @@ const CompanyProfile = ({ currentCompany }) => {
 	return (
 		currentCompany 
 		? 
-			<div className='company-profile'>
-				
+			<div className='company-profile'>				
+				<h2>{currentCompany.companyName}</h2>
 				<div className='company-info'>
 					<img alt='logo' src={currentCompany.logo} />
 					<div className='company-data'>
-						<h2>{currentCompany.companyName}</h2>
 						<span>{currentCompany.country}</span>
 						<span>{currentCompany.location}</span>
 						<span>{currentCompany.address}</span>
+						<span>{currentCompany.role}</span>
 					</div>
 				</div>
 				

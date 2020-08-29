@@ -57,6 +57,14 @@ class InventoryManagement extends React.Component {
         return (
             <div className='inventory-mgmt'>
                 <form onSubmit={this.handleSubmit}>
+                    <FormInput
+                        type='date'
+                        name='date'
+                        label='Date'
+                        value={this.state.date}
+                        onChange={this.handleChange}
+                        required
+                    />
                     <CustomSelect name='warehouse' onChange={this.handleChange} value={this.state.warehouse}>
                         <option>select warehouse</option>
                         {
@@ -67,43 +75,50 @@ class InventoryManagement extends React.Component {
                             null
                         }
                     </CustomSelect>
-
-                    <CustomSelect name='move' onChange={this.handleChange} value={this.state.move}>
-                        <option>Move</option>
-                        <option>input</option>
-                        <option>output</option>
-                    </CustomSelect>
+                    {
+                        this.state.warehouse
+                        ? <CustomSelect name='move' onChange={this.handleChange} value={this.state.move}>
+                            <option>Move</option>
+                            <option>input</option>
+                            <option>output</option>
+                        </CustomSelect>
+                        : null
+                    }
+                    {
+                        this.state.move
+                        ? <CustomSelect name='product' onChange={this.handleChange} value={this.state.product}>
+                            <option>select product</option>
+                            {
+                                products
+                                ?
+                                products.map(product => 
+                                    <option key={product.id} value={product.id}>
+                                        {product.product} in {product.unit}
+                                    </option>)
+                                :
+                                null
+                            }
+                        </CustomSelect>
+                        : null
+                    }
+                    {
+                        this.state.product
+                        ? <FormInput 
+                            type='number'
+                            name='quantity'
+                            label='Quantity'
+                            value={this.state.quantity}
+                            onChange={this.handleChange}
+                            required
+                        />
+                        : null
+                    }
+                    {
+                        this.state.quantity
+                        ? <CustomButton>Set Movement</CustomButton>
+                        : null
+                    }                                   
                     
-                    <CustomSelect name='product' onChange={this.handleChange} value={this.state.product}>
-                        <option>select product</option>
-                        {
-                            products
-                            ?
-                            products.map(product => 
-                                <option key={product.id} value={product.id}>
-                                    {product.product} in {product.unit}
-                                </option>)
-                            :
-                            null
-                        }
-                    </CustomSelect>
-                    <FormInput
-                        type='date'
-                        name='date'
-                        label='Date'
-                        value={this.state.date}
-                        onChange={this.handleChange}
-                        required
-                    />
-                    <FormInput 
-                        type='number'
-                        name='quantity'
-                        label='Quantity'
-                        value={this.state.quantity}
-                        onChange={this.handleChange}
-                        required
-                    />                    
-                    <CustomButton>Set Movement</CustomButton>
                 </form>
             </div>
         )

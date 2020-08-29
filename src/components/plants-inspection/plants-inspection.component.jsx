@@ -7,7 +7,7 @@ import Custombutton from '../custom-button/custom-button.component';
 import InspectionRecords from '../inspection-records/inspection-records.component';
 
 import { selectInspectionRecords } from '../../redux/inspection/inspection.selectors';
-import { selectCurrentSector } from '../../redux/sector/sector.selectors';
+import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { setInspection } from '../../redux/inspection/inspection.actions';
 import { createInspectionDocumentInRanch, createRegisterDocInRanch } from '../../firebase/firebase.utils';

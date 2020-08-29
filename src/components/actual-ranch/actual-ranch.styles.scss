@@ -5,7 +5,11 @@
 	}
 
 	.ranch-display {
+		cursor: pointer;
 
+		&:hover {
+			background-color: cadetblue;
+		}
 
 		
 		.ranch-option {

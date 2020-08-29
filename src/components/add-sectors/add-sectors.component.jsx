@@ -5,7 +5,7 @@ import FormInput from '../../components/form-input/form-input.component';
 import CustomButton from '../../components/custom-button/custom-button.component';
 
 import { selectCurrentRanch } from '../../redux/ranch/ranch.selectors';
-import { setCurrentSector } from '../../redux/sector/sector.actions';
+import { setCurrentSector } from '../../redux/ranch/ranch.actions';
 import { addSectorDocumentInRanch } from '../../firebase/firebase.utils';
 
 import './add-sectors.styles.scss';

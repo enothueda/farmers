@@ -5,6 +5,11 @@
 	}
 
 	.sector-display {
+		cursor: pointer;
+
+		&:hover {
+			background-color: cadetblue;
+		}
 
 		.sector-option {
 			font-size: 20px;

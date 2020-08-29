@@ -52,16 +52,11 @@ class App extends React.Component {
         clearCompaniesInfo();
         const allCompanies = await getCompanyIdFromUser(userRef);
         if(allCompanies) {
-          const companyRef = await allCompanies.map(companyId => getCompanyInfoFromId(companyId))
-          companyRef.forEach(
-            company => company.onSnapshot(
-              snapshot => 
-                getAllCompanies({
-                  id: snapshot.id,
-                  ...snapshot.data()
-                })            
-            )
-          )
+          allCompanies.forEach(companyId => 
+            getCompanyInfoFromId(companyId, userRef.id)
+            .then(response => getAllCompanies(response))
+            .catch(error => console.log(error))
+            )          
         }        
        
         /*
