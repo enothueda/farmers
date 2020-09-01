@@ -27,9 +27,7 @@ const ActualRanch = ({ currentRanch }) => {
 				: <div className='note' onClick={() => showOptions()}>SELECT A RANCH</div>
 			}
 			{
-				show
-				? <RanchSelect />
-				: null
+				show &&	<RanchSelect />
 			}	
 		</div>
 	);

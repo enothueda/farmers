@@ -89,8 +89,7 @@ export const updateImageInDocument = async (collection, docId, route, url, addit
 		await docRef.update(imageDocUpdate)
 	} catch (error) {
 		console.log(error)
-	}
-	
+	}	
 }
 
 export const getCompanyIdFromUser = async (user, additionalData) => {
@@ -99,7 +98,6 @@ export const getCompanyIdFromUser = async (user, additionalData) => {
 	const userData = userSnapshot.data();
 	if(userData.company) {
 		const allCompanies = await userData.company
-
 		/* To get company information from user, however, return a promise resolve issue
 		const companyNames = await allCompanies.map(async companyId => {
 			const companyInfo = await firestore.collection('companies').doc(companyId)
@@ -107,7 +105,6 @@ export const getCompanyIdFromUser = async (user, additionalData) => {
 			const companyData = await companySnapshot.data().companyName
 			return companyData;			
 		})	*/
-
 		return allCompanies;
 	}
 	return	
@@ -351,6 +348,17 @@ export const createInventoryMovement = async (company, user, movement, additiona
 		}
 
 	}
+}
+
+export const passInfoToCompany = async () => {
+	const collectionToRef = firestore.collection('companies').doc()
+	const collectionFromRef = firestore.collection('companies/hon5vX0w6igmXlOz5JcK/ranchs/1001/sectors');
+	const fromSnapshot = await collectionFromRef.get();
+	const fromData = fromSnapshot.docs;
+
+	console.log(fromData)
+
+
 }
 
 firebase.initializeApp(firebaseConfig);

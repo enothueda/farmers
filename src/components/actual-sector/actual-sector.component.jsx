@@ -13,6 +13,7 @@ const ActualSector = ({currentSector}) => {
 	const showOptions = () => {
 		setShow(!show)
 	}
+	
 	return (
 		<div className='actual-sector'>
 			<h3 className='sector-title'>Actual Sector</h3>
@@ -29,9 +30,7 @@ const ActualSector = ({currentSector}) => {
 				<div className='note' onClick={() => showOptions()}>SELECT A SECTOR</div>
 			}
 			{
-				show
-				? <SectorSelect />
-				: null
+				show && <SectorSelect />
 			}	
 		</div>
 	);

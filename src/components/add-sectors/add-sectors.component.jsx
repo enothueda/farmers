@@ -64,6 +64,7 @@ class AddSectors extends React.Component {
                     <FormInput 
                         type='number'
                         name='hectares'
+                        step='any'
                         label='Hectars'
                         placeholder='Hectars or Acres'
                         value={this.state.hectares}
@@ -109,7 +110,6 @@ class AddSectors extends React.Component {
                         placeholder='Plants per hectare'
                         value={this.state.density}
                         onChange={this.handleChange}
-                        required
                     /> 
                     <CustomButton type='submit'>Add Sector</CustomButton>
                 </form>
