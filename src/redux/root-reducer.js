@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'; //default to Local Storage
 import userReducer from './user/user.reducer';
 import companyReducer from './company/company.reducer';
 import ranchReducer from './ranch/ranch.reducer';
-import inspectionReducer from './inspection/inspection.reducer';
+import recordsReducer from './records/records.reducer';
 import cropsReducer from './crops/crops.reducer';
 import cropReducer from './crop/crop.reducer';
 import inventoryReducer from './inventory/inventory.reducer';
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
 	user: userReducer,
 	company: companyReducer,
 	ranch: ranchReducer,
-	inspection: inspectionReducer,
+	records: recordsReducer,
 	crops: cropsReducer,
 	crop: cropReducer,
 	inventory: inventoryReducer

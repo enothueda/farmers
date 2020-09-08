@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import UserProfile from '../../components/user-profile/user-profile.component';
 import UserSettings from '../../components/user-settings/user-settings.component';
+import AssignPermissions from '../../components/assign-permissions/assign-permissions.component';
 
 import './user-page.styles.scss';
+import { selectCurrentCompany } from '../../redux/company/company.selectors';
 
-const UserPage = () => (
+const UserPage = ({ company }) => (
     <div className='user-page'>
 	    <UserProfile />
 	    <UserSettings />
@@ -17,8 +20,15 @@ const UserPage = () => (
 	    	<p>Address</p>
 	    	<p>Starting Date (bck)</p>
 	    	<span>User Type </span>
-	    </div>
+		</div>
+		{	company.role === 'admin' && <AssignPermissions />	}
+		{	company.role === 'manager' && <AssignPermissions />	}
+		
     </div>
 );
 
-export default UserPage;
+const mapStateToProps = state => ({
+	company: selectCurrentCompany(state)
+})
+
+export default connect(mapStateToProps)(UserPage);

@@ -6,10 +6,10 @@ import FormInput from '../form-input/form-input.component';
 import Custombutton from '../custom-button/custom-button.component';
 import InspectionRecords from '../inspection-records/inspection-records.component';
 
-import { selectInspectionRecords } from '../../redux/inspection/inspection.selectors';
+import { selectInspectionRecords } from '../../redux/records/records.selectors';
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { setInspection } from '../../redux/inspection/inspection.actions';
+import { setInspection } from '../../redux/records/records.actions';
 import { createInspectionDocumentInRanch, createRegisterDocInRanch } from '../../firebase/firebase.utils';
 
 import './plants-inspection.styles.scss';
@@ -56,7 +56,7 @@ class PlantsInspection extends React.Component {
 
 	
 	render() {
-		const { records, currentSector } = this.props;
+		const { detections, currentSector } = this.props;
 
 		return (
 			currentSector ?
@@ -104,7 +104,7 @@ class PlantsInspection extends React.Component {
 		        
 		        <div className='inspection'>
 		            <h4>Inspection Records</h4>
-		            <InspectionRecords records={records} />
+		            <InspectionRecords detections={detections} />
 		            
 		        </div>		        
 		    	               
@@ -116,7 +116,7 @@ class PlantsInspection extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	records: selectInspectionRecords(state),
+	detections: selectInspectionRecords(state),
 	currentSector: selectCurrentSector(state),
 	currentUser: selectCurrentUser(state)
 });

@@ -5,7 +5,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import CustomSelect from '../custom-select/custom-select.component';
 import { selectCurrentCrop } from '../../redux/crop/crop.selectors';
-import { addRecord } from '../../redux/inspection/inspection.actions';
+import { setDetection } from '../../redux/records/records.actions';
 
 import './inspection-display.styles.scss';
 
@@ -22,11 +22,11 @@ class InspectionDisplay extends React.Component {
 	}
 
 	handleSubmit = event => {
-		const { addRecord } = this.props;		
+		const { setDetection } = this.props;		
 		event.preventDefault();
 		// To add a ternary with currentSector ? addRecord... : select a sector
 		console.log(this.state)
-		addRecord(this.state.data);
+		setDetection(this.state.data);
 		// this is try to clean all data from select, has to check the value with ternary
 		this.setState({
 			data: {
@@ -100,7 +100,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	addRecord: record => dispatch(addRecord(record))
+	setDetection: detection => dispatch(setDetection(detection))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InspectionDisplay);

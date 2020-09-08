@@ -350,14 +350,35 @@ export const createInventoryMovement = async (company, user, movement, additiona
 	}
 }
 
-export const passInfoToCompany = async () => {
-	const collectionToRef = firestore.collection('companies').doc()
-	const collectionFromRef = firestore.collection('companies/hon5vX0w6igmXlOz5JcK/ranchs/1001/sectors');
-	const fromSnapshot = await collectionFromRef.get();
-	const fromData = fromSnapshot.docs;
+export const setPermissionsToUser = async (companyId, permission) => {
+	if(!companyId || !permission) return;
 
-	console.log(fromData)
+	const companyRef = firestore.collection('companies').doc(companyId);
+	const companySnapShot = await companyRef.get()
 
+	const usersRef = firestore.collection('users')
+	const usersSnapshot = await usersRef.get()
+	const usersDocs = usersSnapshot.docs.map(user => ({id: user.id, ...user.data()}))
+	const userToGivePermissions = usersDocs.find(user => user.email === permission.email)
+
+	if (userToGivePermissions) {
+		try {
+			const newUserPermission = {}
+			newUserPermission[`users.${userToGivePermissions.id}`] = permission.role
+			await companyRef.update(newUserPermission)
+	
+			const userRef = firestore.collection('users').doc(userToGivePermissions.id);
+			await userRef.update({
+				company: firebase.firestore.FieldValue.arrayUnion(companySnapShot.id)
+			});
+		} catch(error) {
+			console.log(error)
+		}
+		
+		return 'permission succesfully set'
+	} else {
+		return 'user email it is not registered yet'
+	}
 
 }
 

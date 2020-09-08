@@ -46,6 +46,7 @@ class AddNewProduct extends React.Component {
     render() {
         return (
             <div>
+                <h2>Give permissions</h2>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'

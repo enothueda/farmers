@@ -23,8 +23,7 @@ import { auth,
   createUserProfileDocument, 
   getCompanyIdFromUser, 
   getCompanyInfoFromId, 
-  getCropsForSelect,
-  passInfoToCompany
+  getCropsForSelect
 } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 import { getAllCompaniesFromUser, clearCompaniesInfo } from './redux/company/company.actions';
@@ -38,8 +37,6 @@ class App extends React.Component {
 
   componentDidMount() {
     const { setCurrentUser, getAllCompanies, setCropsInfo, clearCompaniesInfo } = this.props;
-
-    passInfoToCompany();
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
