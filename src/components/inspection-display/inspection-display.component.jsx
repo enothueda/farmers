@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import CustomSelect from '../custom-select/custom-select.component';
-import { selectCurrentCrop } from '../../redux/crop/crop.selectors';
+import { selectCurrentCrop } from '../../redux/crops/crops.selectors';
 import { setDetection } from '../../redux/records/records.actions';
 
 import './inspection-display.styles.scss';

@@ -1,7 +1,8 @@
 import { CropsActionTypes } from './crops.types';
 
 const INITIAL_STATE = {
-	cropsInfo: []
+	cropsInfo: [],
+	currentCrop: {}
 }
 
 const cropsReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,11 @@ const cropsReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				cropsInfo: action.payload
+			}
+		case CropsActionTypes.SET_CURRENT_CROP:
+			return {
+				...state,
+				currentCrop: action.payload
 			}
 		default:
 			return state

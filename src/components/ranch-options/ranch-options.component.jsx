@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { setCurrentRanch } from '../../redux/ranch/ranch.actions';
-import { setCurrentCrop } from '../../redux/crop/crop.actions';
+import { setCurrentCrop } from '../../redux/crops/crops.actions';
 import { selectCropsInfo } from '../../redux/crops/crops.selectors';
 import { setAllSectors} from '../../redux/ranch/ranch.actions';
 import { getSectorsFromRanch } from '../../firebase/firebase.utils';

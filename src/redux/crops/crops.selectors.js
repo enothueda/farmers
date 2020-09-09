@@ -8,6 +8,6 @@ export const selectCropsInfo = createSelector(
 );
 
 export const selectCurrentCrop = createSelector(
-	[selectCropsInfo],
-	cropsInfo => cropsInfo.name
-)
+	[selectCrops],
+	crops => crops.currentCrop
+);

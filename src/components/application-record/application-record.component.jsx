@@ -121,6 +121,7 @@ class ApplicationRecord extends React.Component {
                         type='number'
                         name='dose'
                         label='Dose'
+                        step='any'
                         placeholder='Dose per hectar'
                         value={this.state.dose}
                         onChange={this.handleChange}
@@ -130,6 +131,7 @@ class ApplicationRecord extends React.Component {
                         type='number'
                         name='volume'
                         label='Water Volume'
+                        step='any'
                         placeholder='Water Volume per hectar'
                         value={this.state.volume}
                         onChange={this.handleChange}

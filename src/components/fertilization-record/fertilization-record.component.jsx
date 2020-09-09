@@ -106,6 +106,7 @@ class FertilizationRecord extends React.Component {
                         type='number'
                         name='dose'
                         label='Dose'
+                        step='any'
                         placeholder='Dose/Quantity per hectar'
                         value={this.state.dose}
                         onChange={this.handleChange}
@@ -115,6 +116,7 @@ class FertilizationRecord extends React.Component {
                         type='number'
                         name='volume'
                         label='Volume'
+                        step='any'
                         placeholder='Quantity per hectar'
                         value={this.state.volume}
                         onChange={this.handleChange}

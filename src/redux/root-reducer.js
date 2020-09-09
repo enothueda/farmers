@@ -7,7 +7,6 @@ import companyReducer from './company/company.reducer';
 import ranchReducer from './ranch/ranch.reducer';
 import recordsReducer from './records/records.reducer';
 import cropsReducer from './crops/crops.reducer';
-import cropReducer from './crop/crop.reducer';
 import inventoryReducer from './inventory/inventory.reducer';
 
 const persistConfig = {
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
 	ranch: ranchReducer,
 	records: recordsReducer,
 	crops: cropsReducer,
-	crop: cropReducer,
 	inventory: inventoryReducer
 });
 
