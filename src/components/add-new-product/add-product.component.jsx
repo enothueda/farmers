@@ -45,8 +45,7 @@ class AddNewProduct extends React.Component {
 
     render() {
         return (
-            <div>
-                <h2>Give permissions</h2>
+            <div className='add-new-product'>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput 
                         type='text'
@@ -83,8 +82,8 @@ class AddNewProduct extends React.Component {
                         onChange={this.handleChange}
                         required
                     />                     
-                    <CustomSelect label='Unit' name='unit' onChange={this.handleChange}>
-                        <option>select unit</option>
+                    <CustomSelect label='Unit' name='unit' onChange={this.handleChange} value={this.state.unit}>
+                        <option value=''>select unit</option>
                         {
                             units.map((unit, idx) => <option key={idx}>{unit}</option>)
                         }
