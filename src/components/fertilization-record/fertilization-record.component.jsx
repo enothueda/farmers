@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
+import { createRegisterDocInRanch } from '../../firebase/firebase.utils';
+import { addFertilizationRecord } from '../../redux/records/records.actions'
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -26,12 +27,13 @@ class FertilizationRecord extends React.Component {
 		}
 	}
 
-	handleSubmit = event => {
+	handleSubmit = async event => {
         event.preventDefault();
-        const { currentSector, currentUser } = this.props;
+        const { currentSector, currentUser, fertilization } = this.props;
         
         if(currentSector) {
-            createRegisterDocInRanch('fertilization', this.state, currentSector, currentUser.id);
+            await fertilization(this.state);
+            await createRegisterDocInRanch('fertilization', this.state, currentSector, currentUser.id);
             this.setState({
                 date: '',
                 startTime: '',
@@ -144,4 +146,8 @@ const mapStateToProps = state => ({
 	currentUser: selectCurrentUser(state)
 });
 
-export default connect(mapStateToProps)(FertilizationRecord);
+const mapDispatchToProps = dispatch => ({
+    fertilization: record => dispatch(addFertilizationRecord(record))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(FertilizationRecord);

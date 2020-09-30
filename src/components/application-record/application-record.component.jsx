@@ -5,6 +5,7 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
+import { addApplicationRecord } from '../../redux/records/records.actions';
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -28,12 +29,13 @@ class ApplicationRecord extends React.Component {
 		}
 	}
 
-	handleSubmit = event => {
+	handleSubmit = async event => {
         event.preventDefault();
-        const { currentSector, currentUser } = this.props;
+        const { currentSector, currentUser, application } = this.props;
         
         if(currentSector) {
-            createRegisterDocInRanch('applications', this.state, currentSector, currentUser.id);
+            await application(this.state);
+            await createRegisterDocInRanch('applications', this.state, currentSector, currentUser.id);
             this.setState({
                 date: '',
                 startTime: '',
@@ -48,7 +50,7 @@ class ApplicationRecord extends React.Component {
                 reentry: ''
             })
         } else {
-            console.log('SELECT A SECTOR')
+            console.log('SECTOR IS MISSING')
         }
 
 	}
@@ -177,4 +179,8 @@ const mapStateToProps = state => ({
 	currentUser: selectCurrentUser(state)
 });
 
-export default connect(mapStateToProps)(ApplicationRecord);
+const mapDispatchToProps = dispatch => ({
+    application: record => dispatch(addApplicationRecord(record))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicationRecord);

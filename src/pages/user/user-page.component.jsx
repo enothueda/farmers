@@ -21,8 +21,11 @@ const UserPage = ({ company }) => (
 	    	<p>Starting Date (bck)</p>
 	    	<span>User Type </span>
 		</div>
-		{	company.role === 'admin' && <AssignPermissions />	}
-		{	company.role === 'manager' && <AssignPermissions />	}
+		{	company 
+			? company.role === 'admin' || company.role === 'manager' ? <AssignPermissions /> : null
+			: null
+		}
+		
 		
     </div>
 );

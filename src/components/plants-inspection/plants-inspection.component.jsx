@@ -24,27 +24,24 @@ class PlantsInspection extends React.Component {
 		}
 	}
 
-	handleSubmit = event => {
-		const { records, setInspection, currentSector, currentUser } = this.props;
+	handleSubmit = async event => {
+		const { detections, setInspection, currentSector, currentUser } = this.props;
 		const { inspectionDate, sample } = this.state
 		event.preventDefault();
 		
 		const fullInspection = {
 			inspectionDate,
 			sample,
-			records
+			detections
 		}
 
 		if (currentSector) {
-			createRegisterDocInRanch('inspections', fullInspection, currentSector, currentUser.id);
-			setInspection(fullInspection);
+			await createRegisterDocInRanch('inspections', fullInspection, currentSector, currentUser.id);
+			await setInspection(fullInspection);
 			this.setState({inspectionDate: '', sample: ''})
 		} else {
 			console.log('SELECT A SECTOR');
 		}
-		
-
-		
 	}
 
 	handleChange = event => {

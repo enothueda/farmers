@@ -3,7 +3,10 @@ import { removePestDetection } from './records.utils'
 
 const INITIAL_STATE = {
 	detections: [],
-	inspection: {}
+	inspection: {},
+	harvest: [],
+	fertilization: [],
+	application: []
 }
 
 const recordsReducer = (state = INITIAL_STATE, action) => {
@@ -24,6 +27,21 @@ const recordsReducer = (state = INITIAL_STATE, action) => {
 				...state,
 				detections: removePestDetection(state.detections, action.payload)
 			}
+		case RecordsActionTypes.ADD_HARVEST_RECORD:
+			return {
+				...state,
+				harvest: [...state.harvest, action.payload]
+			}
+		case RecordsActionTypes.ADD_FERTILIZATION_RECORD:
+			return {
+				...state,
+				fertilization: [...state.fertilization, action.payload]
+			}
+		case RecordsActionTypes.ADD_APPLICATION_RECORD:
+				return {
+					...state,
+					application: [...state.application, action.payload]
+				}
 		default:
 			return state;
 	}

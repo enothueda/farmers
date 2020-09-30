@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
+import { createRegisterDocInRanch } from '../../firebase/firebase.utils';
+import { addHarvestRecord } from '../../redux/records/records.actions';
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
@@ -22,12 +23,13 @@ class HarvestRecord extends React.Component {
 		}
 	}
 
-	handleSubmit = event => {
+	handleSubmit = async event => {
         event.preventDefault();
-        const { currentSector, currentUser } = this.props;
+        const { currentSector, currentUser, harvestRecord } = this.props;
 
         if(currentSector) {
-            createRegisterDocInRanch('harvest', this.state, currentSector, currentUser.id);
+            await harvestRecord(this.state);
+            await createRegisterDocInRanch('harvest', this.state, currentSector, currentUser.id);
             this.setState({
                 record: '',
                 date: '',
@@ -36,7 +38,7 @@ class HarvestRecord extends React.Component {
                 quantity: ''
             })
         } else {
-            console.log('SELECT A SECTOR')
+            console.log('SECTOR IS MISSING')
         }
 
 	}
@@ -56,7 +58,7 @@ class HarvestRecord extends React.Component {
                         name='record'
                         label='Record'
                         placeholder='Id / Tag / Record / Number'
-                        value={this.state.ingredient}
+                        value={this.state.record}
                         onChange={this.handleChange}
                         required
                     />
@@ -93,7 +95,7 @@ class HarvestRecord extends React.Component {
                         name='quantity'
                         label='Quantity'
                         placeholder='Boxes / Units '
-                        value={this.state.volume}
+                        value={this.state.quantity}
                         onChange={this.handleChange}
                         required
                     /> 
@@ -110,4 +112,8 @@ const mapStateToProps = state => ({
 	currentUser: selectCurrentUser(state)
 });
 
-export default connect(mapStateToProps)(HarvestRecord);
+const mapDispatchToProps = dispatch => ({
+    harvestRecord: record => dispatch(addHarvestRecord(record))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HarvestRecord);
