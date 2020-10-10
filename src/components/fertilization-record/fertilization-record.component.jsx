@@ -129,7 +129,7 @@ class FertilizationRecord extends React.Component {
                         name='method'
                         label='Aplication Method'
                         placeholder='Foliar, Irrigation, Granular'
-                        value={this.state.pest}
+                        value={this.state.method}
                         onChange={this.handleChange}
                         required
                     />                    

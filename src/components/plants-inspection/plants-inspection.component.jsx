@@ -5,6 +5,7 @@ import InspectionDisplay from '../inspection-display/inspection-display.componen
 import FormInput from '../form-input/form-input.component';
 import Custombutton from '../custom-button/custom-button.component';
 import InspectionRecords from '../inspection-records/inspection-records.component';
+import DetectionRecord from '../detection-record/detection-record.component';
 
 import { selectInspectionRecords } from '../../redux/records/records.selectors';
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
@@ -59,44 +60,43 @@ class PlantsInspection extends React.Component {
 			currentSector ?
 			<div className="sampling">
 				<h3>Plants Inspection</h3>
-				<InspectionDisplay 
-		        	group='pests'
-
-		        />
-		        <InspectionDisplay 
-		        	group='diseases'
-
-		        />
-		        <InspectionDisplay 
-		        	group='beneficials'
-		        />
-		        <br/>
+				{
+				/*  REVIEW IF INSPECTION DISPLAY NEEDS TO BE DELETED AT ALL
+					THEN, DELETE THIS
+					<InspectionDisplay group='pests' />
+					<InspectionDisplay group='diseases' />
+					<InspectionDisplay group='beneficials' />
+					<br/>
+				*/
+				}
+				<DetectionRecord />
+				<br/>
 				<form onSubmit={this.handleSubmit} >
-			        <FormInput
-			        	type='date'
-			        	name='inspectionDate'
-			        	label='Inspection Date'		        	
-			        	placeholder='Sampling Date'
-			        	value={this.state.inspectionDate}
-			        	onChange={this.handleChange}
-			        	required
-			        />
-
-			        {
-			        /*	<p>Sample Spot (GPS or reference)</p> */
-			        }
+					<FormInput
+						type='date'
+						name='inspectionDate'
+						label='Inspection Date'		        	
+						placeholder='Sampling Date'
+						value={this.state.inspectionDate}
+						onChange={this.handleChange}
+						required
+					/>
+					
+					{
+						/*	<p>Sample Spot (GPS or reference)</p> */
+					}
 		        
-		            <FormInput 
-		            	type='number'
-		            	name='sample'
-		            	label='Plants / Sample'
-		            	placeholder="Plants per sample"
-		            	value={this.state.sample}
-		            	onChange={this.handleChange}
-		            	min='1'
-		            	max='1000'
-		            />
-		             <Custombutton type='submit'>Add Inspection</Custombutton>
+					<FormInput 
+						type='number'
+						name='sample'
+						label='Plants / Sample'
+						placeholder="Plants per sample"
+						value={this.state.sample}
+						onChange={this.handleChange}
+						min='1'
+						max='1000'
+					/>					
+		            <Custombutton type='submit'>Set Inspection</Custombutton>
 		        </form>			       
 		        
 		        <div className='inspection'>

@@ -33,18 +33,14 @@ const InspectionRecords = ({ detections, removeDetection }) => {
 			{	detections 
 				? detections.map((record, index) => 
 					<div key={index} className='record-data'>
-						<span className='data'>{Object.keys(record)[2].toUpperCase()}</span>
-						<div className='data'>
-							<span className='pest'>{record.pests}</span>
-							<span className='disease'>{record.diseases}</span>
-							<span className='beneficials'>{record.beneficials}</span>
-						</div>
+						<span className='data'>{record.type.toUpperCase()}</span>						
+						<span className='data'>{record.name}</span>
 						<span className='data'>{record.quantity}</span>
 						<span className='data'>{record.incidence}</span>
 						<div className='remove-button' onClick={() => deleteDetection(record)}>&#10005;</div>				
 					</div>
 				)
-				: null
+				: null				
 			}
 		</div>
 	);

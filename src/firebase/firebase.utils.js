@@ -3,17 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = {
-	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
-	authDomain: "farmers-db.firebaseapp.com",
-	databaseURL: "https://farmers-db.firebaseio.com",
-	projectId: "farmers-db",
-	storageBucket: "farmers-db.appspot.com",
-	messagingSenderId: "249695488238",
-	appId: "1:249695488238:web:92ccf8542676237589cbff",
-	measurementId: "G-8CSMG7VZCB"
-};
-
+const firebaseConfig = 'YOUR API AND INFO HERE'
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
 
@@ -21,7 +11,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 	const snapShot = await userRef.get();
 
 	if(!snapShot.exists) {
-		const {displayName, email, photoURL, emailVerified, phoneNumber } = userAuth;
+		const { displayName, email, photoURL, emailVerified, phoneNumber } = userAuth;
 		const createdAt = new Date();
 
 		try {
