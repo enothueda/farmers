@@ -20,4 +20,10 @@ export const selectCurrentSector = createSelector(
 export const selectAllSectors = createSelector(
 	[selectRanch],
 	sector => sector.allSectors
+);
+
+export const selectSectorsSelected = createSelector(
+	[selectRanch],
+	ranch => ranch.selectedSectors
+
 )

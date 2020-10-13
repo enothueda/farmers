@@ -18,7 +18,7 @@ const RanchOptions = ({ranch, setCurrentRanch, cropsInfo, setCurrentCrop, setAll
 				setCurrentRanch(ranch);
 				setCurrentCrop(currentCrop);
 				getSectorsFromRanch(ranch)
-				.then(response => response.map(doc => doc.data()))
+				.then(response => response.map(doc => ({sectorId: doc.id, ...doc.data()})))
 				.then(docData => setAllSectors(docData))
 				.catch(error => console.log(error.message));
 			}}

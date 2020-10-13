@@ -1,10 +1,12 @@
 import { RanchActionTypes } from './ranch.types';
+import { addSector, removeSector } from './ranch.utils';
 
 const INITIAL_STATE = {
 	currentRanch: null,
 	allRanches: [],
 	currentSector: null,
-	allSectors: null
+	allSectors: null,
+	selectedSectors: []
 }
 
 const ranchReducer = (state = INITIAL_STATE, action) => {
@@ -36,6 +38,21 @@ const ranchReducer = (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				allRanches: []
+			}
+		case RanchActionTypes.SET_SELECTED_SECTOR:
+			return {
+				...state,
+				selectedSectors: [...state.selectedSectors, action.payload]
+			}
+		case RanchActionTypes.REMOVE_SELECTED_SECTOR:
+			return {
+				...state,
+				selectedSectors: removeSector(state.selectedSectors, action.payload)
+			}
+		case RanchActionTypes.CLEAR_SELECTED_SECTORS:
+			return {
+				...state,
+				selectedSectors: []
 			}
 		default:
 			return state;

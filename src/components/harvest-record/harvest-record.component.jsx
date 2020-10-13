@@ -17,7 +17,7 @@ class HarvestRecord extends React.Component {
 		this.state = {
             record: '',
             date: '',
-            startTime: '',
+            harvestTime: '',
             product: '',
             quantity: ''
 		}
@@ -33,7 +33,7 @@ class HarvestRecord extends React.Component {
             this.setState({
                 record: '',
                 date: '',
-                startTime: '',
+                harvestTime: '',
                 product: '',
                 quantity: ''
             })
@@ -76,7 +76,7 @@ class HarvestRecord extends React.Component {
                         name='startTime'
                         label='Harvest Time'
                         placeholder='Hour and Minutes'
-                        value={this.state.startTime}
+                        value={this.state.harvestTime}
                         onChange={this.handleChange}
                         required
                     />                    

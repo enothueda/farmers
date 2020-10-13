@@ -3,16 +3,7 @@ import 'firebase/firestore';
 import 'firebase/storage';
 import 'firebase/auth';
 
-const firebaseConfig = {
-	apiKey: "AIzaSyAhykS3Spci8jC10vqjEgH_k5g40ciG1t4",
-	authDomain: "farmers-db.firebaseapp.com",
-	databaseURL: "https://farmers-db.firebaseio.com",
-	projectId: "farmers-db",
-	storageBucket: "farmers-db.appspot.com",
-	messagingSenderId: "249695488238",
-	appId: "1:249695488238:web:92ccf8542676237589cbff",
-	measurementId: "G-8CSMG7VZCB"
-};
+const firebaseConfig = 'YOUR API AND INFO HERE'
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 	if(!userAuth) return;
@@ -282,10 +273,10 @@ export const createInspectionDocumentInRanch = async (inspection, sectorInfo, in
 	return inspectionRef;
 }
 
-export const createRegisterDocInRanch = async (collection, registerData, sectorInfo, inspector) => {
+export const createRegisterDocInRanch = async (collection, registerData, ranchInfo, sector, inspector) => {
 	const createdAt = new Date();	//evaluate to add the register time instead
 	const parsedDate = Date.parse(createdAt);
-	const { sector, companyId, ranchId } = sectorInfo;
+	const { companyId, ranchId } = ranchInfo;
 	const registerCollectionRef = firestore.collection(`companies/${companyId}/ranchs/${ranchId}/${collection}`);
 	const registerRef = registerCollectionRef.doc(`${parsedDate}`);
 	const registerSnapshot = await registerRef.get();
@@ -305,6 +296,7 @@ export const createRegisterDocInRanch = async (collection, registerData, sectorI
 
 	return registerRef;
 }
+
 export const createInventoryMovement = async (company, user, movement, additionalData) => {
 	console.log('fire move', movement);
 	// add the if statement for evaluate data before

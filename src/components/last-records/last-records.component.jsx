@@ -6,23 +6,18 @@ const LastRecords = ({ records }) => {
     console.log(records)
     return (
         <div className='last-records'>
-            <h3>Last Records</h3>
-            {
-                records
-                ? 
-                    <div className='records-header'>
-                        <div className='record-block'>
-                            <span>Date</span>
-                        </div>
-                        <div className='record-block'>
-                            <span>Product</span>
-                        </div>	
-                        <div className='record-block'>
-                            <span>Quantity</span>
-                        </div>
-                    </div>
-                : null
-            }           
+            <h3>Last Records</h3>            
+            <div className='records-header'>
+                <div className='record-block'>
+                    <span>Date</span>
+                </div>
+                <div className='record-block'>
+                    <span>Product</span>
+                </div>	
+                <div className='record-block'>
+                    <span>Quantity</span>
+                </div>
+            </div>
             {
                 records
                 ? records.map((record, idx) => 
@@ -33,7 +28,6 @@ const LastRecords = ({ records }) => {
                     </div>
                 )
                 : null
-
             }
         </div>
     );

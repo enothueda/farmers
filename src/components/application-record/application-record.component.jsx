@@ -6,7 +6,8 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
 import { addApplicationRecord } from '../../redux/records/records.actions';
-import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
+import { clearSelectedSectors } from '../../redux/ranch/ranch.actions'
+import { selectCurrentRanch, selectSectorsSelected } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './application-record.styles.scss';
@@ -31,11 +32,12 @@ class ApplicationRecord extends React.Component {
 
 	handleSubmit = async event => {
         event.preventDefault();
-        const { currentSector, currentUser, application } = this.props;
+        const { ranch, sectors, currentUser, application, clearSectors } = this.props;
         
-        if(currentSector) {
+        if(sectors.length) {
             await application(this.state);
-            await createRegisterDocInRanch('applications', this.state, currentSector, currentUser.id);
+            await createRegisterDocInRanch('applications', this.state, ranch, sectors, currentUser.id);
+            await clearSectors()
             this.setState({
                 date: '',
                 startTime: '',
@@ -91,7 +93,25 @@ class ApplicationRecord extends React.Component {
                         value={this.state.endTime}
                         onChange={this.handleChange}
                         required
-                    /> 
+                    />
+                    <FormInput 
+                        type='text'
+                        name='equipment'
+                        label='Equipment'
+                        placeholder='Equipment or Machinery'
+                        value={this.state.equipment}
+                        onChange={this.handleChange}
+                        required
+                    />
+                    <FormInput 
+                        type='text'
+                        name='pest'
+                        label='Pest'
+                        placeholder='Pest or Disease'
+                        value={this.state.pest}
+                        onChange={this.handleChange}
+                        required
+                    />
                     <FormInput 
                         type='text'
                         name='product'
@@ -109,16 +129,7 @@ class ApplicationRecord extends React.Component {
                         value={this.state.ingredient}
                         onChange={this.handleChange}
                         required
-                    />
-                    <FormInput 
-                        type='text'
-                        name='equipment'
-                        label='Equipment'
-                        placeholder='Equipment or Machinery'
-                        value={this.state.equipment}
-                        onChange={this.handleChange}
-                        required
-                    />
+                    />                    
                     <FormInput 
                         type='number'
                         name='dose'
@@ -138,16 +149,7 @@ class ApplicationRecord extends React.Component {
                         value={this.state.volume}
                         onChange={this.handleChange}
                         required
-                    /> 
-                    <FormInput 
-                        type='text'
-                        name='pest'
-                        label='Pest'
-                        placeholder='Pest or Disease'
-                        value={this.state.pest}
-                        onChange={this.handleChange}
-                        required
-                    />
+                    />                     
                     <FormInput 
                         type='number'
                         name='interval'
@@ -175,12 +177,15 @@ class ApplicationRecord extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	currentSector: selectCurrentSector(state),
-	currentUser: selectCurrentUser(state)
+	ranch: selectCurrentRanch(state),
+    currentUser: selectCurrentUser(state),
+    sectors: selectSectorsSelected(state)
+    
 });
 
 const mapDispatchToProps = dispatch => ({
-    application: record => dispatch(addApplicationRecord(record))
+    application: record => dispatch(addApplicationRecord(record)),
+    clearSectors: () => dispatch(clearSelectedSectors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationRecord);

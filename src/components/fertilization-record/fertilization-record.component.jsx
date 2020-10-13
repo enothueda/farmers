@@ -5,8 +5,9 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { createRegisterDocInRanch } from '../../firebase/firebase.utils';
-import { addFertilizationRecord } from '../../redux/records/records.actions'
-import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
+import { addFertilizationRecord } from '../../redux/records/records.actions';
+import { clearSelectedSectors } from '../../redux/ranch/ranch.actions';
+import { selectSectorsSelected, selectCurrentRanch } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 import './fertilization-record.styles.scss';
@@ -29,11 +30,12 @@ class FertilizationRecord extends React.Component {
 
 	handleSubmit = async event => {
         event.preventDefault();
-        const { currentSector, currentUser, fertilization } = this.props;
-        
-        if(currentSector) {
+        const { selectedSectors, ranch, currentUser, fertilization, clearSectors } = this.props;
+        const sectors = selectedSectors;
+        if(sectors.length) {
             await fertilization(this.state);
-            await createRegisterDocInRanch('fertilization', this.state, currentSector, currentUser.id);
+            await createRegisterDocInRanch('fertilization', this.state, ranch, sectors, currentUser.id);
+            await clearSectors()
             this.setState({
                 date: '',
                 startTime: '',
@@ -88,6 +90,15 @@ class FertilizationRecord extends React.Component {
                     /> 
                     <FormInput 
                         type='text'
+                        name='method'
+                        label='Aplication Method'
+                        placeholder='Foliar, Irrigation, Granular'
+                        value={this.state.method}
+                        onChange={this.handleChange}
+                        required
+                    />
+                    <FormInput 
+                        type='text'
                         name='product'
                         label='Product'
                         placeholder='Commercial Name'
@@ -123,16 +134,7 @@ class FertilizationRecord extends React.Component {
                         value={this.state.volume}
                         onChange={this.handleChange}
                         required
-                    /> 
-                    <FormInput 
-                        type='text'
-                        name='method'
-                        label='Aplication Method'
-                        placeholder='Foliar, Irrigation, Granular'
-                        value={this.state.method}
-                        onChange={this.handleChange}
-                        required
-                    />                    
+                    />                                         
                     <CustomButton type='submit'>Record Fertilization</CustomButton>
 				</form>
 			</div>
@@ -142,12 +144,14 @@ class FertilizationRecord extends React.Component {
 };
 
 const mapStateToProps = state => ({
-	currentSector: selectCurrentSector(state),
-	currentUser: selectCurrentUser(state)
+	selectedSectors: selectSectorsSelected(state),
+    currentUser: selectCurrentUser(state),
+    ranch: selectCurrentRanch(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-    fertilization: record => dispatch(addFertilizationRecord(record))
+    fertilization: record => dispatch(addFertilizationRecord(record)),
+    clearSectors: () => dispatch(clearSelectedSectors())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(FertilizationRecord);

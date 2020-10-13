@@ -22,4 +22,18 @@ export const setCurrentSector = sector => ({
 
 export const clearRanchesData = () => ({
 	type: RanchActionTypes.CLEAR_RANCHES
+});
+
+export const setSelectedSector = sector => ({
+	type: RanchActionTypes.SET_SELECTED_SECTOR,
+	payload: sector
+});
+
+export const removeSelectedSector = sector => ({
+	type: RanchActionTypes.REMOVE_SELECTED_SECTOR,
+	payload: sector
+});
+
+export const clearSelectedSectors = () => ({
+	type: RanchActionTypes.CLEAR_SELECTED_SECTORS
 })
