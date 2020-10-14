@@ -5,7 +5,7 @@ export const addSector = (selectedSectors, sectorToAdd) => {
         return selectedSectors
     }
 
-    return [...selectedSectors, ...sectorToAdd]
+    return [...selectedSectors, sectorToAdd]
 }
 
 
