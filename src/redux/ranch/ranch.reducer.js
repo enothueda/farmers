@@ -42,7 +42,7 @@ const ranchReducer = (state = INITIAL_STATE, action) => {
 		case RanchActionTypes.SET_SELECTED_SECTOR:
 			return {
 				...state,
-				selectedSectors: [...state.selectedSectors, action.payload]
+				selectedSectors: addSector(state.selectedSectors, action.payload)
 			}
 		case RanchActionTypes.REMOVE_SELECTED_SECTOR:
 			return {
