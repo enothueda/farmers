@@ -18,6 +18,7 @@ const MultiSectors = ({ allSectors, removeSector, setSector, sectors }) => {
             removeSector(value)
         }        
     }
+    console.log('sectors', sectors)
 
     return (
         <div className='multi-sectors'>
