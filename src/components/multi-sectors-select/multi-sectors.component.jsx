@@ -32,7 +32,6 @@ const MultiSectors = ({ allSectors, removeSector, setSector, sectors }) => {
                     label={sector.sector}
                     value={sector.sectorId}
                     onChange={handleSelect}
-                    checked={sectors ? sectors.find(search => search === sector.sectorId) : false}
                 />)
             : null
         }
