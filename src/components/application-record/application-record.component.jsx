@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import InputSearchList from '../input-search-list/input-search-list.component';
+import ApplicationProduct from '../application-product/application-product.component';
 
 import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
 import { addApplicationRecord } from '../../redux/records/records.actions';
@@ -10,38 +12,40 @@ import { clearSelectedSectors } from '../../redux/ranch/ranch.actions'
 import { selectCurrentRanch, selectSectorsSelected } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
+import organisms from '../../organisms';
+import agroproducts from '../../agroproducts';
+
 import './application-record.styles.scss';
 
-class ApplicationRecord extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			date: '',
-                startTime: '',
-                endTime: '',
-                product: '',
-                ingredient: '',
-                equipment: '',
-                dose: '',
-                volume: '',
-                pest: '',
-                interval: '',
-                reentry: ''
-		}
-	}
+const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearSectors }) => {
 
-	handleSubmit = async event => {
+    const [application, setApplication] = useState({
+        date: '',
+        startTime: '',
+        endTime: '',
+        method: '',
+        product: '',
+        ingredient: '',
+        equipment: '',
+        dose: '',
+        volume: '',
+        pest: '',
+        interval: '',
+        reentry: ''
+    })
+
+	const handleSubmit = async event => {
         event.preventDefault();
-        const { ranch, sectors, currentUser, application, clearSectors } = this.props;
         
         if(sectors.length) {
-            await application(this.state);
-            await createRegisterDocInRanch('applications', this.state, ranch, sectors, currentUser.id);
+            await addApplication(application);
+            await createRegisterDocInRanch('applications', application, ranch, sectors, currentUser.id);
             await clearSectors()
-            this.setState({
+            setApplication({
                 date: '',
                 startTime: '',
                 endTime: '',
+                method: '',
                 product: '',
                 ingredient: '',
                 equipment: '',
@@ -57,41 +61,80 @@ class ApplicationRecord extends React.Component {
 
 	}
 
-	handleChange = event => {
+	const handleChange = event => {
 		const {name, value} = event.target;
-		this.setState({ [name]: value })
-	}
+        setApplication({ ...application, [name]: value })
+    }
+    
+    let options = []
+    Object.values(organisms).forEach(list => list.forEach(element => options.push(element)))
+    console.log(options)
 
-	render() {
-		return (
-			<div className='application-record'>
-				<h2>Record your Application</h2>
-				<form onSubmit={this.handleSubmit}>
-					<FormInput 
-                        type='date'
-                        name='date'
-                        label='Date'
-                        placeholder='Name, Code, ID or number'
-                        value={this.state.date}
-                        onChange={this.handleChange}
-                        required
-                    />
+    const products = agroproducts.map(product => product.product)
+    const applicationOptions = ['Foliar', 'Riego', 'Drench', 'Granular']
+    const equipmentOptions = ['Bomba de Motor', 'Bomba Manual', 'Bomba de Inyeccion', 'Nebulizadora', 'Parihuela' ]
+    
+    return (
+        <div className='application-record'>
+            <h2>Record your Application</h2>
+            <form onSubmit={handleSubmit}>
+                <FormInput 
+                    type='date'
+                    name='date'
+                    label='Date'
+                    value={application.date}
+                    onChange={handleChange}
+                    required
+                />
+                <FormInput 
+                    type='time'
+                    name='startTime'
+                    label='Start Time'
+                    value={application.startTime}
+                    onChange={handleChange}
+                    required
+                /> 
+                <FormInput 
+                    type='time'
+                    name='endTime'
+                    label='End Time'
+                    value={application.endTime}
+                    onChange={handleChange}
+                    required
+                />
+                <InputSearchList 
+                    list={applicationOptions} 
+                    inputLabel='Application' 
+                    name='method' 
+                    reference='Foliar, Irrigation, Drench, other'
+                />
+                <InputSearchList 
+                    list={equipmentOptions} 
+                    inputLabel='Equipment' 
+                    name='equipment' 
+                    reference='Pump, Sprinkles, etc'
+                />                
+                <InputSearchList 
+                    list={options} 
+                    inputLabel='Pest or Diseases' 
+                    name='reason' 
+                    reference='Reason of the application'
+                />
+                <InputSearchList 
+                    list={products} 
+                    inputLabel='Product' 
+                    name='product' 
+                    reference='Commercial Name'
+                />
+                <ApplicationProduct />
+                {/*
                     <FormInput 
-                        type='time'
-                        name='startTime'
-                        label='Start Time'
-                        placeholder='Hour and Minutes'
-                        value={this.state.startTime}
-                        onChange={this.handleChange}
-                        required
-                    /> 
-                    <FormInput 
-                        type='time'
-                        name='endTime'
-                        label='End Time'
-                        placeholder='Hour and Minutes'
-                        value={this.state.endTime}
-                        onChange={this.handleChange}
+                        type='text'
+                        name='method'
+                        label='Aplication Method'
+                        placeholder='Foliar, Irrigation, Granular'
+                        value={application.method}
+                        onChange={handleChange}
                         required
                     />
                     <FormInput 
@@ -99,8 +142,8 @@ class ApplicationRecord extends React.Component {
                         name='equipment'
                         label='Equipment'
                         placeholder='Equipment or Machinery'
-                        value={this.state.equipment}
-                        onChange={this.handleChange}
+                        value={application.equipment}
+                        onChange={handleChange}
                         required
                     />
                     <FormInput 
@@ -108,8 +151,8 @@ class ApplicationRecord extends React.Component {
                         name='pest'
                         label='Pest'
                         placeholder='Pest or Disease'
-                        value={this.state.pest}
-                        onChange={this.handleChange}
+                        value={application.pest}
+                        onChange={handleChange}
                         required
                     />
                     <FormInput 
@@ -117,8 +160,8 @@ class ApplicationRecord extends React.Component {
                         name='product'
                         label='Product'
                         placeholder='Commercial Name'
-                        value={this.state.product}
-                        onChange={this.handleChange}
+                        value={application.product}
+                        onChange={handleChange}
                         required
                     /> 
                     <FormInput 
@@ -126,8 +169,8 @@ class ApplicationRecord extends React.Component {
                         name='ingredient'
                         label='Ingredient'
                         placeholder='Active Ingredient'
-                        value={this.state.ingredient}
-                        onChange={this.handleChange}
+                        value={application.ingredient}
+                        onChange={handleChange}
                         required
                     />                    
                     <FormInput 
@@ -136,8 +179,8 @@ class ApplicationRecord extends React.Component {
                         label='Dose'
                         step='any'
                         placeholder='Dose per hectar'
-                        value={this.state.dose}
-                        onChange={this.handleChange}
+                        value={application.dose}
+                        onChange={handleChange}
                         required
                     /> 
                     <FormInput 
@@ -146,8 +189,8 @@ class ApplicationRecord extends React.Component {
                         label='Water Volume'
                         step='any'
                         placeholder='Water Volume per hectar'
-                        value={this.state.volume}
-                        onChange={this.handleChange}
+                        value={application.volume}
+                        onChange={handleChange}
                         required
                     />                     
                     <FormInput 
@@ -155,8 +198,8 @@ class ApplicationRecord extends React.Component {
                         name='interval'
                         label='Interval'
                         placeholder='Safety Interval'
-                        value={this.state.interval}
-                        onChange={this.handleChange}
+                        value={application.interval}
+                        onChange={handleChange}
                         required
                     /> 
                     <FormInput 
@@ -164,15 +207,17 @@ class ApplicationRecord extends React.Component {
                         name='reentry'
                         label='Re-entry Period'
                         placeholder='Safety Time for worker to can entry'
-                        value={this.state.reentry}
-                        onChange={this.handleChange}
+                        value={application.reentry}
+                        onChange={handleChange}
                         required
                     /> 
-                    <CustomButton type='submit'>Record Application</CustomButton>
-				</form>
-			</div>
-		)
-	}
+                    */
+                }
+                <br />
+                <CustomButton type='submit'>Record Application</CustomButton>
+            </form>
+        </div>
+    )
 
 }
 
@@ -184,7 +229,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    application: record => dispatch(addApplicationRecord(record)),
+    addApplication: record => dispatch(addApplicationRecord(record)),
     clearSectors: () => dispatch(clearSelectedSectors())
 })
 

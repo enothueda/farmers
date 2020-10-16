@@ -24,6 +24,6 @@ export const selectAllSectors = createSelector(
 
 export const selectSectorsSelected = createSelector(
 	[selectRanch],
-	ranch => ranch.selectedSectors ? ranch.selectedSectors : []
+	ranch => ranch.selectedSectors
 
 )

@@ -69,8 +69,10 @@ class PlantsInspection extends React.Component {
 					<br/>
 				*/
 				}
+				<h4>Add detections</h4>
 				<DetectionRecord />
 				<br/>
+				<h4>Set the inspection record</h4>
 				<form onSubmit={this.handleSubmit} >
 					<FormInput
 						type='date'

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CustomSelect from '../custom-select/custom-select.component';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import InputSearchList from '../input-search-list/input-search-list.component';
 
 import { setDetection } from '../../redux/records/records.actions';
 
@@ -13,7 +14,6 @@ import './detection-record.styles.scss';
 const DetectionRecord = ({ setDetection }) => {
     const [record, setRecord] = useState({
         type: '',
-        searchOrg: '',
         found: '',
         quantity: '',
         incidence:'',
@@ -28,7 +28,6 @@ const DetectionRecord = ({ setDetection }) => {
         setDetection({ type, name, quantity, incidence });
         setRecord({
             type: '',
-            searchOrg: '',
             found: '',
             quantity: '',
             incidence:'',
@@ -73,6 +72,12 @@ const DetectionRecord = ({ setDetection }) => {
                         options.map((option, idx) => <option key={idx}>{option}</option>)
                     }
                 </CustomSelect>
+                {/* Check how to move the name into redux and check reference option for the input search
+                    record.type
+                    ? <InputSearchList list={organisms[record.type]} inputLabel={record.type} name='organism' />
+                    : null
+                    */
+                }
                 <FormInput 
                         type='text'
                         name='name'
