@@ -12,6 +12,12 @@ const CheckBox = ({ setSector, removeSector, name, label, value, sectors }) => {
 
     const [selected, setSelected] = useState(false);
 
+    useEffect(() => {
+        if(!sectors.length) {
+            setSelected(false)
+        }
+    }, [sectors])
+
     const handleSelect = event => {
         const { value, checked } = event.target;
         if(checked) {

@@ -38,13 +38,13 @@ const InputSearchList = ({ list, inputLabel, name, reference, setInput, input })
     return (
         <div>
             <FormInput 
-            type='text'
-            name={search[name]}
-            placeholder={reference}
-            value={search[name]}
-            label={inputLabel}
-            onChange={searchName}
-            autoComplete='off'
+                type='text'
+                name={name}
+                placeholder={reference}
+                value={search[name]}
+                label={inputLabel}
+                onChange={searchName}
+                autoComplete='off'
             />
 
             <div className='list-display'>

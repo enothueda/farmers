@@ -2,7 +2,7 @@ import React from 'react';
 
 import './last-records.styles.scss';
 
-const LastRecords = ({ records }) => {
+const LastRecords = ({ records, titlea, titleb }) => {
     console.log(records)
     return (
         <div className='last-records'>
@@ -12,10 +12,10 @@ const LastRecords = ({ records }) => {
                     <span>Date</span>
                 </div>
                 <div className='record-block'>
-                    <span>Product</span>
+                    <span>{titlea}</span>
                 </div>	
                 <div className='record-block'>
-                    <span>Quantity</span>
+                    <span>{titleb}</span>
                 </div>
             </div>
             {
@@ -23,8 +23,8 @@ const LastRecords = ({ records }) => {
                 ? records.map((record, idx) => 
                     <div key={record.record || idx} className='records-data'>
                         <span className='data'>{record.date}</span>
-                        <span className='data'>{record.product}</span>
-                        <span className='data'>{record.quantity || record.dose}</span>
+                        <span className='data'>{record.product || record.application }</span>
+                        <span className='data'>{record.quantity || record.equipment}</span>
                     </div>
                 )
                 : null

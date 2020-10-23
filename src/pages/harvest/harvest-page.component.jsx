@@ -17,7 +17,7 @@ const Harvest = ({ harvest }) => (
         <ActualSector />
 
         <HarvestRecord />
-        <LastRecords records={harvest}/>
+        <LastRecords records={harvest} titlea='Product' titleb='Quantity' />
 
     </div>
 

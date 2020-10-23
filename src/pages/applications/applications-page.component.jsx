@@ -16,7 +16,7 @@ const Applications = ({ application , products}) => (
         <ActualRanch />
         <ApplicationRecord />
         <ProductsRecord products={products} />
-        <LastRecords records={application}/>
+        <LastRecords records={application} titlea='Method' titleb='Equipment' />
     </div>
 );
 
