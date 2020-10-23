@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component';
 
+import { setInputSearch } from '../../redux/records/records.actions';
+import { selectInputSearch } from '../../redux/records/records.selectors';
+
 import './input-search-list.styles.scss';
 
-const InputSearchList = ({ list, inputLabel, name, reference }) => {
+const InputSearchList = ({ list, inputLabel, name, reference, setInput, input }) => {
     const [search, setSearch] = useState({
         [name]: '',
         found: ''
     });
 
+    useEffect(() => {
+        setSearch({...search, [name]: input[name]})
+    }, [input])
+
     const setName = (org) => {        
         setSearch({[name]: org, found: ''})
+        setInput({ [name]: org })
     }
     
     const searchName = event => {
-        const search = event.target.value;
+        const inputSearch = event.target.value;
         if(list) {
             const foundName = list
-                .filter(name => 
-                    search
-                    ? name.toLowerCase().includes(search.toLowerCase())
-                    : null)
-            setSearch({found: foundName, [name]: search})
+                .filter(name => name.toLowerCase().includes(inputSearch.toLowerCase()))
+            setSearch({found: foundName, [name]: inputSearch})
+            setInput({ [name]: inputSearch })
         }         
     }
 
@@ -54,4 +61,12 @@ const InputSearchList = ({ list, inputLabel, name, reference }) => {
     )
 }
 
-export default InputSearchList;
+const mapStateToProps = state => ({
+    input: selectInputSearch(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+    setInput: input => dispatch(setInputSearch(input))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputSearchList);

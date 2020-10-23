@@ -17,7 +17,17 @@ export const selectFertilizationRecords = createSelector(
 	records => records.fertilization
 );
 
+export const selectProductsApplication = createSelector(
+	[selectRecords],
+	records => records.products
+);
+
 export const selectApplicationRecords = createSelector(
 	[selectRecords],
 	records => records.application
-)
+);
+
+export const selectInputSearch = createSelector(
+	[selectRecords],
+	records => records.input
+);

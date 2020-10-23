@@ -1,59 +1,67 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import InputSearchList from '../input-search-list/input-search-list.component';
 import ApplicationProduct from '../application-product/application-product.component';
+import MultiSector from '../multi-sectors-select/multi-sectors.component';
 
-import { createRegisterDocInRanch } from '../../firebase/firebase.utils'
-import { addApplicationRecord } from '../../redux/records/records.actions';
-import { clearSelectedSectors } from '../../redux/ranch/ranch.actions'
+import { createRegisterDocInRanch } from '../../firebase/firebase.utils';
+import { addApplicationRecord, clearProductsApplication, clearInputSearch, setInputSearch } from '../../redux/records/records.actions';
+import { clearSelectedSectors } from '../../redux/ranch/ranch.actions';
 import { selectCurrentRanch, selectSectorsSelected } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { selectProductsApplication, selectInputSearch } from '../../redux/records/records.selectors';
 
 import organisms from '../../organisms';
 import agroproducts from '../../agroproducts';
 
 import './application-record.styles.scss';
 
-const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearSectors }) => {
+const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearSectors, products, clearProducts, input, setInput, clearInput }) => {
 
     const [application, setApplication] = useState({
         date: '',
         startTime: '',
         endTime: '',
         method: '',
-        product: '',
-        ingredient: '',
         equipment: '',
-        dose: '',
-        volume: '',
-        pest: '',
-        interval: '',
-        reentry: ''
+        reason: ''
     })
+
+    useEffect(() => {
+        setApplication({
+            ...application,
+            method: input.method || '',
+            equipment: input.equipment || '',
+            reason: input.reason || ''
+        })
+        console.log('inputs', input)
+    }, [input])
 
 	const handleSubmit = async event => {
         event.preventDefault();
         
         if(sectors.length) {
-            await addApplication(application);
-            await createRegisterDocInRanch('applications', application, ranch, sectors, currentUser.id);
-            await clearSectors()
+            await addApplication({...application, products});
+            await createRegisterDocInRanch('applications', {...application, products}, ranch, sectors, currentUser.id);
+            await setInput({
+                method: '',
+                equipment: '',
+                reason: ''
+            })
+            await clearSectors();
+            await clearProducts();
+            await clearInput();
             setApplication({
                 date: '',
                 startTime: '',
                 endTime: '',
                 method: '',
-                product: '',
-                ingredient: '',
                 equipment: '',
-                dose: '',
-                volume: '',
-                pest: '',
-                interval: '',
-                reentry: ''
+                reason: '',
+                product: ''
             })
         } else {
             console.log('SECTOR IS MISSING')
@@ -70,7 +78,6 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
     Object.values(organisms).forEach(list => list.forEach(element => options.push(element)))
     console.log(options)
 
-    const products = agroproducts.map(product => product.product)
     const applicationOptions = ['Foliar', 'Riego', 'Drench', 'Granular']
     const equipmentOptions = ['Bomba de Motor', 'Bomba Manual', 'Bomba de Inyeccion', 'Nebulizadora', 'Parihuela' ]
     
@@ -78,6 +85,8 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
         <div className='application-record'>
             <h2>Record your Application</h2>
             <form onSubmit={handleSubmit}>
+                <MultiSector />
+                <h3>Application Info</h3>
                 <FormInput 
                     type='date'
                     name='date'
@@ -116,16 +125,10 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
                 />                
                 <InputSearchList 
                     list={options} 
-                    inputLabel='Pest or Diseases' 
+                    inputLabel='Pest or Disease' 
                     name='reason' 
                     reference='Reason of the application'
-                />
-                <InputSearchList 
-                    list={products} 
-                    inputLabel='Product' 
-                    name='product' 
-                    reference='Commercial Name'
-                />
+                />                
                 <ApplicationProduct />
                 {/*
                     <FormInput 
@@ -224,13 +227,17 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
 const mapStateToProps = state => ({
 	ranch: selectCurrentRanch(state),
     currentUser: selectCurrentUser(state),
-    sectors: selectSectorsSelected(state)
-    
+    sectors: selectSectorsSelected(state),
+    products: selectProductsApplication(state),
+    input: selectInputSearch(state)  
 });
 
 const mapDispatchToProps = dispatch => ({
     addApplication: record => dispatch(addApplicationRecord(record)),
-    clearSectors: () => dispatch(clearSelectedSectors())
+    setInput: input => dispatch(setInputSearch(input)),
+    clearSectors: () => dispatch(clearSelectedSectors()),
+    clearProducts: () => dispatch(clearProductsApplication()),
+    clearInput: () => dispatch(clearInputSearch())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplicationRecord);

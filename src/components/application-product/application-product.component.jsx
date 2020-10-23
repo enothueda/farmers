@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
+import InputSearchList from '../input-search-list/input-search-list.component';
+
+import { setProductApplication, setInputSearch } from '../../redux/records/records.actions';
+import { selectInputSearch } from '../../redux/records/records.selectors';
+
+import agroproducts from '../../agroproducts';
 
 import './application-product.styles.scss';
 
-const ApplicationProduct = () => {
+const ApplicationProduct = ({ setProducts, input, setInput }) => {
     const [application, setApplication] = useState({
         product: '',
         ingredient: '',
-        equipment: '',
         dose: '',
         volume: '',
-        pest: '',
         interval: '',
         reentry: ''
     });
+
+    useEffect(() => {
+        setApplication({
+            product: input.product || '',
+            ingredient: input.ingredient || ''
+        })
+    }, [input])
 
     const handleChange = event => {
 		const {name, value} = event.target;
@@ -23,30 +35,58 @@ const ApplicationProduct = () => {
     }
 
     const addProduct = () => {
-        console.log(application)
+        setProducts(application);
+        setInput({
+            product: '',
+            ingredient: ''})
+        setApplication({
+            product: '',
+            ingredient: '',
+            dose: '',
+            volume: '',
+            interval: '',
+            reentry: ''
+        })
     }
 
-    return(
+    const productsList = agroproducts.map(product => product.product);
+    const ingredientsList = agroproducts.map(product => product.ingredient);
+
+    return (
         <div>
         <h3>Add product application</h3>
-            <FormInput 
-                type='text'
-                name='product'
-                label='Product'
-                placeholder='Commercial Name'
-                value={application.product}
-                onChange={handleChange}
-                required
-            /> 
-            <FormInput 
-                type='text'
-                name='ingredient'
-                label='Ingredient'
-                placeholder='Active Ingredient'
-                value={application.ingredient}
-                onChange={handleChange}
-                required
-            />                    
+            <InputSearchList 
+                list={productsList} 
+                inputLabel='Product' 
+                name='product' 
+                reference='Commercial Name'
+            />
+            <InputSearchList 
+                list={ingredientsList} 
+                inputLabel='Ingredient' 
+                name='ingredient' 
+                reference='Active Ingredient'
+            />
+            
+            {/*
+                <FormInput 
+                    type='text'
+                    name='product'
+                    label='Product'
+                    placeholder='Commercial Name'
+                    value={application.product}
+                    onChange={handleChange}
+                /> 
+                <FormInput 
+                    type='text'
+                    name='ingredient'
+                    label='Ingredient'
+                    placeholder='Active Ingredient'
+                    value={application.ingredient}
+                    onChange={handleChange}
+                />                    
+                */
+            }
             <FormInput 
                 type='number'
                 name='dose'
@@ -55,7 +95,6 @@ const ApplicationProduct = () => {
                 placeholder='Dose per hectar'
                 value={application.dose}
                 onChange={handleChange}
-                required
             /> 
             <FormInput 
                 type='number'
@@ -65,7 +104,6 @@ const ApplicationProduct = () => {
                 placeholder='Water Volume per hectar'
                 value={application.volume}
                 onChange={handleChange}
-                required
             />                     
             <FormInput 
                 type='number'
@@ -74,7 +112,6 @@ const ApplicationProduct = () => {
                 placeholder='Safety Interval'
                 value={application.interval}
                 onChange={handleChange}
-                required
             /> 
             <FormInput 
                 type='number'
@@ -83,11 +120,20 @@ const ApplicationProduct = () => {
                 placeholder='Safety Time for worker to can entry'
                 value={application.reentry}
                 onChange={handleChange}
-                required
             /> 
-            <CustomButton onClick={() => addProduct()}>Set Product</CustomButton>
+            <div onClick={() => addProduct()}>Set Product</div>
+            {/*<CustomButton onClick={() => addProduct()}>Set Product</CustomButton>*/}
         </div>
     )
 }
 
-export default ApplicationProduct;
+const mapStateToProps = state => ({
+    input: selectInputSearch(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+    setProducts: products => dispatch(setProductApplication(products)),
+    setInput: input => dispatch(setInputSearch(input))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ApplicationProduct);

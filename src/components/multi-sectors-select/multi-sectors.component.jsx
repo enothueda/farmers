@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input.component';
+import CheckBox from '../checkbox/checkbox.component';
 
 import { removeSelectedSector, setSelectedSector } from '../../redux/ranch/ranch.actions';
 import { selectAllSectors, selectSectorsSelected } from '../../redux/ranch/ranch.selectors';
@@ -10,30 +11,32 @@ import './multi-sectors.styles.scss';
 
 const MultiSectors = ({ allSectors, removeSector, setSector, sectors }) => {
 // check the warning, due to the checked is from uncontrolled input passed from the sectors
+    const [selected, setSelected] = useState(false)
     const handleSelect = event => {
-        const { value, checked } = event.target;
+        const { name, value, checked } = event.target;
+        console.log('state', event.target)
         if (value && checked ){
-            setSector(value)
+            setSelected(!selected);
+            setSector(value);
+        
         } else {
-            removeSector(value)
+            setSelected(!selected);
+            removeSector(value);
         }        
     }
     console.log('sectors', sectors)
 
     return (
         <div className='multi-sectors'>
-        <h2>Select Sectors</h2>
+        <legend>Select Sectors</legend>
         {
             allSectors
             ? allSectors.map(sector => 
-                <FormInput 
-                    type= 'checkbox'
+                <CheckBox 
                     key={sector.sectorId}
                     name={sector.sector}
                     label={sector.sector}
                     value={sector.sectorId}
-                    onChange={handleSelect}
-                    checked={sectors ? sectors.find(search => search === sector.sectorId) : false}
                 />)
             : null
         }

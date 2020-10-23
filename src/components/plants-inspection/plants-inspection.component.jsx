@@ -10,7 +10,7 @@ import DetectionRecord from '../detection-record/detection-record.component';
 import { selectInspectionRecords } from '../../redux/records/records.selectors';
 import { selectCurrentSector } from '../../redux/ranch/ranch.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { setInspection } from '../../redux/records/records.actions';
+import { setInspection, clearInputSearch } from '../../redux/records/records.actions';
 import { createInspectionDocumentInRanch, createRegisterDocInRanch } from '../../firebase/firebase.utils';
 
 import './plants-inspection.styles.scss';
@@ -26,7 +26,7 @@ class PlantsInspection extends React.Component {
 	}
 
 	handleSubmit = async event => {
-		const { detections, setInspection, currentSector, currentUser } = this.props;
+		const { detections, setInspection, currentSector, currentUser, clearInput } = this.props;
 		const { inspectionDate, sample } = this.state
 		event.preventDefault();
 		
@@ -35,10 +35,12 @@ class PlantsInspection extends React.Component {
 			sample,
 			detections
 		}
+		console.log('inspection')
 
 		if (currentSector) {
-			await createRegisterDocInRanch('inspections', fullInspection, currentSector, currentUser.id);
+			await createRegisterDocInRanch('inspections', fullInspection, currentSector, currentSector.sector, currentUser.id);
 			await setInspection(fullInspection);
+			await clearInput()
 			this.setState({inspectionDate: '', sample: ''})
 		} else {
 			console.log('SELECT A SECTOR');
@@ -69,10 +71,6 @@ class PlantsInspection extends React.Component {
 					<br/>
 				*/
 				}
-				<h4>Add detections</h4>
-				<DetectionRecord />
-				<br/>
-				<h4>Set the inspection record</h4>
 				<form onSubmit={this.handleSubmit} >
 					<FormInput
 						type='date'
@@ -97,7 +95,10 @@ class PlantsInspection extends React.Component {
 						onChange={this.handleChange}
 						min='1'
 						max='1000'
-					/>					
+					/>	
+					<h4>Add detections</h4>
+					<DetectionRecord />
+					<br/>				
 		            <Custombutton type='submit'>Set Inspection</Custombutton>
 		        </form>			       
 		        
@@ -121,7 +122,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-	setInspection: inspection => dispatch(setInspection(inspection))
+	setInspection: inspection => dispatch(setInspection(inspection)),
+	clearInput: () => dispatch(clearInputSearch())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlantsInspection);

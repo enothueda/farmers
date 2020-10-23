@@ -29,7 +29,7 @@ class HarvestRecord extends React.Component {
 
         if(currentSector) {
             await harvestRecord(this.state);
-            await createRegisterDocInRanch('harvest', this.state, currentSector, currentUser.id);
+            await createRegisterDocInRanch('harvest', this.state, currentSector, currentSector.sector, currentUser.id);
             this.setState({
                 record: '',
                 date: '',
@@ -73,7 +73,7 @@ class HarvestRecord extends React.Component {
                     />
                     <FormInput 
                         type='time'
-                        name='startTime'
+                        name='harvestTime'
                         label='Harvest Time'
                         placeholder='Hour and Minutes'
                         value={this.state.harvestTime}
