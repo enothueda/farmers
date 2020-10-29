@@ -53,8 +53,8 @@ const ApplicationProduct = ({ setProducts, input, setInput }) => {
     const ingredientsList = agroproducts.map(product => product.ingredient);
 
     return (
-        <div>
-        <h3>Add product application</h3>
+        <div className='application-product'>
+            <h3>Add product application</h3>
             <InputSearchList 
                 list={productsList} 
                 inputLabel='Product' 
@@ -121,7 +121,7 @@ const ApplicationProduct = ({ setProducts, input, setInput }) => {
                 value={application.reentry}
                 onChange={handleChange}
             /> 
-            <div onClick={() => addProduct()}>Set Product</div>
+            <div className='button-div' onClick={() => addProduct()}>Set Product</div>
             {/*<CustomButton onClick={() => addProduct()}>Set Product</CustomButton>*/}
         </div>
     )

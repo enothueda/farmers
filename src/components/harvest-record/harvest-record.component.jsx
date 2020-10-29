@@ -60,7 +60,8 @@ class HarvestRecord extends React.Component {
                         placeholder='Id / Tag / Record / Number'
                         value={this.state.record}
                         onChange={this.handleChange}
-                        required
+                        autoComplete='off'
+
                     />
 					<FormInput 
                         type='date'
@@ -79,14 +80,16 @@ class HarvestRecord extends React.Component {
                         value={this.state.harvestTime}
                         onChange={this.handleChange}
                         required
-                    />                    
+                    />
+                                    
                     <FormInput 
                         type='text'
                         name='product'
                         label='Product'
                         placeholder='Product Type / Package / Label'
                         value={this.state.product}
-                        onChange={this.handleChange}
+                        onChange={this.handleChange}                        
+                        autoComplete='off'
                         required
                     /> 
                     

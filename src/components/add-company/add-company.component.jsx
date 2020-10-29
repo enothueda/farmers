@@ -45,7 +45,6 @@ class AddCompany extends React.Component {
 	render() {
 		return (
 			<div className='add-company'>
-				<h2>Add A New Company</h2>
 				<form onSubmit={this.handleSubmit}>
 					<FormInput 
 						type='text'

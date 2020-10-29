@@ -9,8 +9,21 @@
 	}
 
 	.form-input {
-		padding: 2px;
-		width: 200px;
+		padding: 5px 20px;
+		margin: 3px 0;
+		box-sizing: border-box;
+		
+		&:focus {
+			background-color: lightgreen;
+		}
 
 	}
+
+	input[type=checkbox] {
+		width: 25px;
+		height: 18px;
+		cursor: pointer;
+	}
+
+	
 }

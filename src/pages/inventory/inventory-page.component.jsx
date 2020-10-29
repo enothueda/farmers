@@ -34,6 +34,9 @@ class Inventory extends React.Component {
             <div className='inventory'>
                 <h1>Inventory</h1>
 
+                <h3>Inventory Management</h3>
+                <InventoryManagement />
+
                 <h2>Warehouse Inventory</h2>
                 {
                     warehouses
@@ -41,8 +44,7 @@ class Inventory extends React.Component {
                     : null
                 }           
                     
-                    <h3>Inventory Management</h3>
-                    <InventoryManagement />
+                    
 
                     <ProductWithForm  title='Add a Product' />
 

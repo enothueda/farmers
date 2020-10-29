@@ -28,18 +28,21 @@ const MultiSectors = ({ allSectors, removeSector, setSector, sectors }) => {
 
     return (
         <div className='multi-sectors'>
-        <legend>Select Sectors</legend>
-        {
-            allSectors
-            ? allSectors.map(sector => 
-                <CheckBox 
-                    key={sector.sectorId}
-                    name={sector.sector}
-                    label={sector.sector}
-                    value={sector.sectorId}
-                />)
-            : null
-        }
+            <legend className='legend'>Select Sectors</legend>
+            <div className='container'>
+            {
+                allSectors
+                ? allSectors.map(sector => 
+                    <CheckBox 
+                        className='checkbox'
+                        key={sector.sectorId}
+                        name={sector.sector}
+                        label={sector.sector}
+                        value={sector.sectorId}
+                    />)
+                : null
+            }
+            </div>
         </div>
     )
 }

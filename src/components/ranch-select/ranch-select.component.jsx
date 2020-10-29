@@ -7,7 +7,7 @@ import { selectAllRanches } from '../../redux/ranch/ranch.selectors';
 
 import './ranch-select.styles.scss';
 
-const RanchSelect = ({currentCompany, allRanches}) => {  
+const RanchSelect = ({ allRanches }) => {  
 
     return (
     <div className='ranch-select'>

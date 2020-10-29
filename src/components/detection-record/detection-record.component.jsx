@@ -68,7 +68,7 @@ const DetectionRecord = ({ setDetection, inputSearch }) => {
 
     return (
         <div className='detection-record'>
-            <CustomSelect className='inspection-select' name='type' onChange={handleSelect} value={record.type}>
+            <CustomSelect name='type' onChange={handleSelect} value={record.type}>
                 <option value=''>select detection</option>
                 {
                     options.map((option, idx) => <option key={idx}>{option}</option>)
@@ -114,7 +114,7 @@ const DetectionRecord = ({ setDetection, inputSearch }) => {
                 autoComplete='off'					
             />
 
-            <CustomSelect className='inspection-level' name='incidence' value={record.incidence} onChange={handleChange}>
+            <CustomSelect name='incidence' value={record.incidence} onChange={handleChange}>
                 <option value='' >Incidence Level</option>
                 <option value='1' >Level 1</option>
                 <option value='2' >Level 2</option>
@@ -122,7 +122,7 @@ const DetectionRecord = ({ setDetection, inputSearch }) => {
                 <option value='4' >Level 4</option>
                 <option value='5' >Level 5</option>
             </CustomSelect>
-            <div className='button-div' onClick={() => addRecord()}>Add Record</div>
+            <div className='button-div' onClick={() => addRecord()}>Add Detection</div>
         </div>
     )
 }

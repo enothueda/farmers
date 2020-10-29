@@ -26,7 +26,6 @@ const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
             </Link>           
             <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'No Ranch'}</Link>
             <Link className='option' to='/inspections'>Inspections</Link>
-            <Link className='option' to='/fertilization'>Fertilization</Link>   
             <Link className='option' to='/applications'>Applications</Link>            
             <Link className='option' to='/harvest'>Harvest</Link>
             <Link className='option' to='/inventory'>Inventory</Link>
