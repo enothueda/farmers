@@ -33,7 +33,7 @@ const InputSearchList = ({ list, inputLabel, name, reference, setInput, input })
         }         
     }
 
-    console.log('search list', search);
+    console.log('search list', search.found);
 
     return (
         <div>
@@ -49,7 +49,7 @@ const InputSearchList = ({ list, inputLabel, name, reference, setInput, input })
 
             <div className='list-display'>
             {
-                search.found 
+                search[name]
                 ? search.found
                     .filter((org, idx) => idx < 10)
                     .map((org, idx) => 

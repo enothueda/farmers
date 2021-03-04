@@ -74,7 +74,7 @@ class App extends React.Component {
         */
 
         const allCrops = await getCropsForSelect();
-        const cropsInfo = await allCrops.map(doc => doc.data())
+        const cropsInfo = allCrops.map(doc => doc.data())
         setCropsInfo(cropsInfo);
 
       } else {

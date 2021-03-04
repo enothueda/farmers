@@ -10,6 +10,8 @@ import { selectCropsInfo } from '../../redux/crops/crops.selectors';
 
 import { createNewRanchDocument } from '../../firebase/firebase.utils';
 
+import crops from '../../crops'
+
 import './add-ranch.styles.scss';
 
 class AddRanch extends React.Component {
@@ -99,7 +101,7 @@ class AddRanch extends React.Component {
                     <CustomSelect label='Crop' name='crop' onChange={this.handleChange}>
                         <option>select a crop</option>
                         {
-                           cropNames.map((crop, idx) => <option key={idx} value={crop.name}>{crop.name}</option>)
+                           crops.map((crop, idx) => <option key={idx} value={crop}>{crop}</option>)
                         }
                     </CustomSelect>
                     <p>Season</p>
