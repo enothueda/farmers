@@ -15,19 +15,19 @@ const InspectionRecords = ({ detections, removeDetection }) => {
 		<div className='inspection-records'>
 			<div className='records-header'>
 				<div className='record-block'>
-					<span>Group</span>
+					<span>Tipo</span>
 				</div>
 				<div className='record-block'>
-					<span>Name</span>
+					<span>Nombre</span>
 				</div>	
 				<div className='record-block'>
-					<span>Quantity</span>
+					<span>Cantidad</span>
 				</div>
 				<div className='record-block'>
-					<span>Level</span>
+					<span>Nivel</span>
 				</div>
 				<div className='record-block'>
-					<span>Remove</span>
+					<span>Borrar</span>
 				</div>
 			</div>
 			{	detections 

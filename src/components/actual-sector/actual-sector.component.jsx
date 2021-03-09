@@ -16,7 +16,7 @@ const ActualSector = ({currentSector}) => {
 	
 	return (
 		<div className='actual-sector'>
-			<h3 className='sector-title'>Actual Sector</h3>
+			<h3 className='sector-title'>Sector Actual</h3>
 			{
 				currentSector ?
 				(
@@ -27,7 +27,7 @@ const ActualSector = ({currentSector}) => {
 						<span className='sector-option'>{currentSector.plantingDate}</span>					
 					</div>
 				) :
-				<div className='note' onClick={() => showOptions()}>SELECT A SECTOR</div>
+				<div className='note' onClick={() => showOptions()}>SELECCIONE SECTOR</div>
 			}
 			{
 				show && <SectorSelect />

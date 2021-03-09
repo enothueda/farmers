@@ -49,38 +49,39 @@ class AddCompany extends React.Component {
 					<FormInput 
 						type='text'
 						name='companyName'
-						label='Company Name'
-						placeholder='Company Name'
+						label='Nombre'
+						placeholder='Nombre de Empresa'
 						value={this.state.companyName}
 						onChange={this.handleChange}
 						required
 					/>
-                    <FormInput 
-                        type='text'
-                        name='country'
-                        label='Country'
-                        placeholder='Country'
-                        value={this.state.country}
-                        onChange={this.handleChange}
-                        required
-                    />
+                    
                     <FormInput 
                         type='text'
                         name='location'
-                        label='Location'
-                        placeholder='Location'
+                        label='Ubicación'
+                        placeholder='Ubicación de la empresa'
                         value={this.state.location}
                         onChange={this.handleChange}                        
                     />
                     <FormInput 
                         type='text'
+                        name='country'
+                        label='Pais'
+                        placeholder='Pais de registro'
+                        value={this.state.country}
+                        onChange={this.handleChange}
+                        required
+                    />
+					<FormInput 
+                        type='text'
                         name='address'
-                        label='Address'
-                        placeholder='Address'
+                        label='Dirección'
+                        placeholder='Dirección'
                         value={this.state.address}
                         onChange={this.handleChange}                        
                     />
-                    <CustomButton type='submit'>Create Company</CustomButton>
+                    <CustomButton type='submit'>Crear Empresa</CustomButton>
 					
 				</form>
 			</div>

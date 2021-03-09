@@ -61,7 +61,7 @@ class PlantsInspection extends React.Component {
 		return (
 			currentSector ?
 			<div className="sampling">
-				<h3>Plants Inspection</h3>
+				<h3>Inspeccion de Plagas y Enfermedades</h3>
 				{
 				/*  REVIEW IF INSPECTION DISPLAY NEEDS TO BE DELETED AT ALL
 					THEN, DELETE THIS
@@ -75,7 +75,7 @@ class PlantsInspection extends React.Component {
 					<FormInput
 						type='date'
 						name='inspectionDate'
-						label='Inspection Date'		        	
+						label='Fecha de Inspección'		        	
 						placeholder='Sampling Date'
 						value={this.state.inspectionDate}
 						onChange={this.handleChange}
@@ -89,21 +89,21 @@ class PlantsInspection extends React.Component {
 					<FormInput 
 						type='number'
 						name='sample'
-						label='Plants / Sample'
-						placeholder="Plants per sample"
+						label='Plantas por Muestra'
+						placeholder="Plantas "
 						value={this.state.sample}
 						onChange={this.handleChange}
 						min='1'
 						max='1000'
 					/>	
-					<h4>Add detections</h4>
+					<h4>Agregar Detección</h4>
 					<DetectionRecord />
 					<br/>				
-		            <Custombutton type='submit'>Set Inspection</Custombutton>
+		            <Custombutton type='submit'>Registrar Inspeccion</Custombutton>
 		        </form>			       
 		        
 		        <div className='inspection'>
-		            <h4>Inspection Records</h4>
+		            <h4>Registro de Inspecciones</h4>
 		            <InspectionRecords detections={detections} />
 		            
 		        </div>		        

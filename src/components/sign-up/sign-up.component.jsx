@@ -56,14 +56,14 @@ class SignUp extends React.Component {
         const { displayName, email, password, confirmPassword} = this.state;
 		return(
 			<div className='sign-up'>
-                <h2 className='title'>I do not have an account</h2> 
-                <span>Sign up with your email and password</span>
+                <h2 className='title'>No tengo cuenta</h2> 
+                <span>Registro con correo y contraseña</span>
 				<form onSubmit={this.handleSubmit} >
 					<FormInput 
                         type='text'
                         name='displayName'
-                        label='Name'
-                        placeholder='Name'
+                        label='Nombre'
+                        placeholder='Nombre'
                         value={displayName}
                         onChange={this.handleChange}
                         required
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                     <FormInput 
                         type='email'
                         name='email'
-                        label='Email'
+                        label='Correo'
                         placeholder='Email'
                         value={email}
                         onChange={this.handleChange}
@@ -80,7 +80,7 @@ class SignUp extends React.Component {
                     <FormInput 
                         type='password'
                         name='password'
-                        label='Password'
+                        label='Contraseña'
                         placeholder='Password'
                         value={password}
                         onChange={this.handleChange}
@@ -89,13 +89,13 @@ class SignUp extends React.Component {
                     <FormInput 
                         type='password'
                         name='confirmPassword'
-                        label='Confirm Password'
-                        placeholder='Confirm Password'
+                        label='Confirma Contraseña'
+                        placeholder='Confirma Password'
                         value={confirmPassword}
                         onChange={this.handleChange}
                         required
                     />
-                    <CustomButton type='submit'>Sign Up</CustomButton>
+                    <CustomButton type='submit'>Registrar</CustomButton>
                 </form>
 			</div>
 		)

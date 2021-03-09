@@ -69,7 +69,7 @@ const DetectionRecord = ({ setDetection, inputSearch }) => {
     return (
         <div className='detection-record'>
             <CustomSelect name='type' onChange={handleSelect} value={record.type}>
-                <option value=''>select detection</option>
+                <option value=''>seleccione tipo</option>
                 {
                     options.map((option, idx) => <option key={idx}>{option}</option>)
                 }
@@ -107,22 +107,22 @@ const DetectionRecord = ({ setDetection, inputSearch }) => {
                 type='number'
                 min='0'
                 name='quantity'
-                placeholder='Quantity per spot'
-                label='Quantity'
+                placeholder='Por punto de muestreo'
+                label='Cantidad'
                 value={record.quantity}
                 onChange={handleChange}	
                 autoComplete='off'					
             />
 
             <CustomSelect name='incidence' value={record.incidence} onChange={handleChange}>
-                <option value='' >Incidence Level</option>
-                <option value='1' >Level 1</option>
-                <option value='2' >Level 2</option>
-                <option value='3' >Level 3</option>
-                <option value='4' >Level 4</option>
-                <option value='5' >Level 5</option>
+                <option value='' >Nivel de Incidencia</option>
+                <option value='1' >Nivel 1</option>
+                <option value='2' >Nivel 2</option>
+                <option value='3' >Nivel 3</option>
+                <option value='4' >Nivel 4</option>
+                <option value='5' >Nivel 5</option>
             </CustomSelect>
-            <div className='button-div' onClick={() => addRecord()}>Add Detection</div>
+            <div className='button-div' onClick={() => addRecord()}>Agregar detección</div>
         </div>
     )
 }

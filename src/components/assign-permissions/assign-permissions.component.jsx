@@ -42,10 +42,10 @@ const AssignPermissions = ({ company }) => {
 
     return (
         <div className='assign-permissions'>
-            <h2>Give Permissions</h2>
+            <h2>Asignación de permisos</h2>
             <form onSubmit={handleSubmit}>
                 <CustomSelect label='' name='role' onChange={handleChange}>
-                    <option>select a profile</option>
+                    <option>seleccione rol</option>
                     {
                         roles.map((role, idx) => <option key={idx}>{role}</option>)
                     }
@@ -53,12 +53,12 @@ const AssignPermissions = ({ company }) => {
                 <FormInput 
                     type='email'
                     name='email'
-                    placeholder='email of invitee'
+                    placeholder='correo del empleado'
                     value={permissions.email}
                     onChange={handleChange}
                     required
                 />
-                <CustomButton type='submit'>Give Permissions</CustomButton>
+                <CustomButton type='submit'>Asignar Permisos</CustomButton>
                 { msg && <div>{msg}</div>}
             </form>
         </div>

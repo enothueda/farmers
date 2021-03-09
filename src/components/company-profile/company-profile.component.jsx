@@ -30,7 +30,7 @@ const CompanyProfile = ({ currentCompany }) => {
 			</div> 
 		:
 			<div className='company-profile'>
-				<span>Please Add a Company or Request access to your Manager</span>
+				<span>Registre una empresa o solicite acceso a una empresa</span>
 			</div>
 )};
 

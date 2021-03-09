@@ -13,7 +13,7 @@ class Inspections extends React.Component {
     render(){
         return (
             <div className="inspections">
-                <h1>Plant Health Inspection</h1>
+                <h1>Inspeccion de Plantas</h1>
                 <ActualRanch />
                 <ActualSector />                                                 
                 

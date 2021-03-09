@@ -30,7 +30,7 @@ class Ranchs extends React.Component {
         const { currentCompany, currentRanch } = this.props;
         return(
             <div>
-                <h1>Ranch Setup</h1>                
+                <h1>Configuración de Ranchos</h1>                
                 <div>
                     <ActualRanch />
 
@@ -39,11 +39,11 @@ class Ranchs extends React.Component {
                 </div>
                 {
                     currentCompany
-                    ? <RanchWithForm title='Add a Ranch'/> 
-                    : <h4>Please Add or Select a Company</h4>
+                    ? <RanchWithForm title='Agregar Rancho'/> 
+                    : <h4>Agregue o seleccion una empresa</h4>
                 }
                 {
-                    currentRanch && <SectorsWithForm title='Add Sector' /> 
+                    currentRanch && <SectorsWithForm title='Agregar Sector' /> 
                 }
                                  
             </div>

@@ -12,29 +12,29 @@ import './navbar.styles.scss'
 const NavBar = ({ currentUser, currentCompany, currentRanch, dispatch }) => {
     //console.log('NavBar company', currentCompany );
     return(
-        <div className='navbar'>
+        <div className='navbar' onClick={()=> dispatch(toggleNavBarHidden())}>
             <div className='close-icon'>
-                <div className='close-button' onClick={()=> dispatch(toggleNavBarHidden())}>&#10005;</div>
+                <div className='close-button'>&#10005;</div>
             </div>
             <h1>Farmers</h1>
-            <Link className='option' to='/'>Home</Link>
+            <Link className='option' to='/'>Inicio</Link>
             <Link className='option' to='/user'> {currentUser ? currentUser.displayName : 'User'} </Link>
             <Link className='option' to='/company'>
                 {
-                    currentCompany ? currentCompany.companyName : 'Add Company'
+                    currentCompany ? currentCompany.companyName : 'Sin Compañia'
                 }
             </Link>           
-            <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'No Ranch'}</Link>
-            <Link className='option' to='/inspections'>Inspections</Link>
-            <Link className='option' to='/applications'>Applications</Link>            
+            <Link className='option' to='/ranchs'>{currentRanch ? currentRanch.name : 'Sin Rancho'}</Link>
+            <Link className='option' to='/inspections'>Inspecciones</Link>
+            <Link className='option' to='/applications'>Aplicaciones</Link>            
             <Link className='option' to='/harvest'>Harvest</Link>
             <Link className='option' to='/inventory'>Inventory</Link>
             <br />
             {
                 currentUser?
-                <div className='option' onClick={() => auth.signOut()} >Sign Out</div>
+                <div className='option' onClick={() => auth.signOut()} >Salir</div>
                 :
-                <Link className='option' to='/signin'>Sign In</Link> 
+                <Link className='option' to='/signin'>Ingresar</Link> 
             }
             <br />
             { /*

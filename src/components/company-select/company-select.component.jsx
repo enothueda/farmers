@@ -16,7 +16,7 @@ const CompanySelect = ({ allCompanies, setCurrentCompany, setCurrentRanch }) => 
 	
 	return (
 		<div className='company-select'>
-			<h3>SELECT A COMPANY</h3>
+			<h3>SELECCIONE EMPRESA</h3>
 			{
 				allCompanies 
 				? allCompanies.map(company => 

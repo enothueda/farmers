@@ -9,7 +9,7 @@ const UserProfile = ({currentUser, currentCompany}) => {
 	return (
 		currentUser ?
 			<div className='user-profile'>
-		    	<h1>User Profile</h1>
+		    	<h1>Perfil de Usuario</h1>
 		    	<div className='user-info'>
 		    		<img className='profile-photo' src={currentUser.photoURL} alt='user'/>
 		    		<div className='profile-data'>

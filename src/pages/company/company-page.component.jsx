@@ -16,7 +16,7 @@ const CompanyPage = ({ currentUser }) =>  {
 
 	return (
 		<div className='company-page'>
-			<h1>Company Profile</h1>			
+			<h1>Empresa</h1>			
 			{
 				currentUser
 				? 
@@ -28,8 +28,8 @@ const CompanyPage = ({ currentUser }) =>  {
 			<CompanyProfile />
 			{
 				currentUser 
-				? <AddCompanyWithForm title='Add a New Company' /> 
-				: <h4>Please Sign In First</h4>
+				? <AddCompanyWithForm title='Registrar empresa' /> 
+				: <h4>Inicie sesion o Registrese para tener acceso</h4>
 			}
 				
 		</div>

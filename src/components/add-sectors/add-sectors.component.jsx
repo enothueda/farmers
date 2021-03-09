@@ -56,7 +56,7 @@ class AddSectors extends React.Component {
                         type='text'
                         name='sector'
                         label='Sector'
-                        placeholder='Name, Code, ID or number'
+                        placeholder='Nombre, Numero o codigo de sector'
                         value={this.state.sector}
                         onChange={this.handleChange}
                         required
@@ -65,8 +65,8 @@ class AddSectors extends React.Component {
                         type='number'
                         name='hectares'
                         step='any'
-                        label='Hectars'
-                        placeholder='Hectars or Acres'
+                        label='Superficie'
+                        placeholder='Hectareas '
                         value={this.state.hectares}
                         onChange={this.handleChange}
                         required
@@ -74,31 +74,31 @@ class AddSectors extends React.Component {
                     <FormInput 
                         type='text'
                         name='variety'
-                        label='Variety'
-                        placeholder='Variety'
+                        label='Variedad'
+                        placeholder='Variedad'
                         value={this.state.variety}
                         onChange={this.handleChange}
                     /> 
                     <FormInput 
                         type='text'
                         name='origin'
-                        label='Origin'
-                        placeholder='Origin'
+                        label='Origen'
+                        placeholder='Origen o Tratamiento'
                         value={this.state.origin}
                         onChange={this.handleChange}
                     /> 
                     <FormInput 
                         type='text'
                         name='treatment'
-                        label='Treatment'
-                        placeholder='Treatment'
+                        label='Tratamiento'
+                        placeholder='Tratamiento'
                         value={this.state.treatment}
                         onChange={this.handleChange}
                     />
                     <FormInput 
                         type='date'
                         name='plantingDate'
-                        label='Planting Date'
+                        label='Plantación o Poda'
                         placeholder='Planting Date'
                         value={this.state.plantingDate}
                         onChange={this.handleChange}
@@ -106,12 +106,12 @@ class AddSectors extends React.Component {
                     <FormInput 
                         type='number'
                         name='density'
-                        label='Density'
-                        placeholder='Plants per hectare'
+                        label='Densidad'
+                        placeholder='Plantas por hectarea'
                         value={this.state.density}
                         onChange={this.handleChange}
                     /> 
-                    <CustomButton type='submit'>Add Sector</CustomButton>
+                    <CustomButton type='submit'>REgistrar Sector</CustomButton>
                 </form>
             </div>
 		);

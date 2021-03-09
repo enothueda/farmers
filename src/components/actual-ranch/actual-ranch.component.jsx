@@ -16,7 +16,7 @@ const ActualRanch = ({ currentRanch }) => {
 	
 	return (
 		<div className='actual-ranch'>
-			<h2 className='ranch-title'>Actual Ranch</h2>
+			<h2 className='ranch-title'>Rancho</h2>
 			{
 				currentRanch 
 				? <div className='ranch-display' onClick={() => showOptions()}>
@@ -24,7 +24,7 @@ const ActualRanch = ({ currentRanch }) => {
 					<span className='ranch-option'>{currentRanch.name}</span>				
 					<span className='ranch-option'>{currentRanch.crop} </span>
 				</div>			
-				: <div className='note' onClick={() => showOptions()}>SELECT A RANCH</div>
+				: <div className='note' onClick={() => showOptions()}>SELECCIONE RANCHO</div>
 			}
 			{
 				show &&	<RanchSelect />

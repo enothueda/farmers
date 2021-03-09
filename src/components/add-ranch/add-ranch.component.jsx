@@ -66,8 +66,8 @@ class AddRanch extends React.Component {
                     <FormInput 
                         type='text'
                         name='name'
-                        label='Ranch Name'
-                        placeholder='Ranch Name'
+                        label='Nombre'
+                        placeholder='Nombre de Rancho'
                         value={this.state.name}
                         onChange={this.handleChange}
                         required
@@ -75,8 +75,8 @@ class AddRanch extends React.Component {
                     <FormInput 
                         type='text'
                         name='ranchId'
-                        label='Ranch ID'
-                        placeholder='Ranch ID'
+                        label='ID'
+                        placeholder='Numero o Codigo'
                         value={this.state.ranchId}
                         onChange={this.handleChange}
                         required
@@ -84,31 +84,31 @@ class AddRanch extends React.Component {
                     <FormInput 
                         type='text'
                         name='code'
-                        label='Ranch Code'
-                        placeholder='Ranch Code'
+                        label='Codigo'
+                        placeholder='Codigo de Rancho'
                         value={this.state.code}
                         onChange={this.handleChange}
                     />                    
                     <FormInput 
                         type='text'
                         name='area'
-                        label='Growing Area'
-                        placeholder='Growing Area'
+                        label='Zona'
+                        placeholder='Zona de Producción'
                         value={this.state.area}
                         onChange={this.handleChange}
                         required
                     />
-                    <CustomSelect label='Crop' name='crop' onChange={this.handleChange}>
-                        <option>select a crop</option>
+                    <CustomSelect label='Cultivo' name='crop' onChange={this.handleChange}>
+                        <option>Seleccione Cultivo</option>
                         {
                            crops.map((crop, idx) => <option key={idx} value={crop}>{crop}</option>)
                         }
                     </CustomSelect>
-                    <p>Season</p>
+                    <p>Temporada</p>
                     <FormInput 
                         type='date'
                         name='seasonStart'
-                        label='Starting Date'
+                        label='Inicio'
                         placeholder='Starting Date'
                         value={this.state.seasonStart}
                         onChange={this.handleChange}
@@ -117,13 +117,14 @@ class AddRanch extends React.Component {
                     <FormInput 
                         type='date'
                         name='seasonEnd'
-                        label='Ending Date'
+                        label='Cierre'
                         placeholder='Ending Date'
                         value={this.state.seasonEnd}
                         onChange={this.handleChange}
                         required
                     />
-                    <p>Location (GPS)</p>
+                    {/* REVIEW IF THE NEXT SECTIONS MAKE SENSE*/}
+                    <p>Ubicación (GPS)</p>
                     <FormInput 
                         type='text'
                         name='latitude'
@@ -139,18 +140,18 @@ class AddRanch extends React.Component {
                         placeholder='Longitude'
                         value={this.state.longitude}
                         onChange={this.handleChange}                        
-                    />
-                    <p>Adress</p>
+                    />                    
+                    <p>Direccion</p>
                     <FormInput 
                         type='text'
                         name='address'
-                        label='Addres'
+                        label='Direccion'
                         placeholder='Street, number or km, city and state'
                         value={this.state.address}
                         onChange={this.handleChange}
                         required
                     />
-                    <CustomButton type='submit'>Add Ranch</CustomButton>
+                    <CustomButton type='submit'>Registrar Rancho</CustomButton>
                 </form>
             </div>
     	)
