@@ -12,11 +12,11 @@ import { selectApplicationRecords, selectProductsApplication } from '../../redux
 
 const Applications = ({ application , products}) => (
     <div>
-        <h1>Applications</h1>
+        <h1>Aplicaciones</h1>
         <ActualRanch />
         <ApplicationRecord />
         <ProductsRecord products={products} />
-        <LastRecords records={application} titlea='Method' titleb='Equipment' />
+        <LastRecords records={application} titlea='Metodo' titleb='Equipo' />
     </div>
 );
 

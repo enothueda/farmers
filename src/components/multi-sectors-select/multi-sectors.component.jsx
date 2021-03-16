@@ -28,7 +28,7 @@ const MultiSectors = ({ allSectors, removeSector, setSector, sectors }) => {
 
     return (
         <div className='multi-sectors'>
-            <legend className='legend'>Select Sectors</legend>
+            <legend className='legend'>Seleccione Sectores</legend>
             <div className='container'>
             {
                 allSectors

@@ -57,8 +57,7 @@ class AddRanch extends React.Component {
         this.setState({ [name]: value})
     }
 
-    render() {
-        const { cropNames } = this.props;
+    render() { 
 
     	return (
     		<div className='add-ranch'>

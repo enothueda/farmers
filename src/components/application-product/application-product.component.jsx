@@ -54,18 +54,18 @@ const ApplicationProduct = ({ setProducts, input, setInput }) => {
 
     return (
         <div className='application-product'>
-            <h3>Add product application</h3>
+            <h3>Producto aplicado</h3>
             <InputSearchList 
                 list={productsList} 
-                inputLabel='Product' 
+                inputLabel='Producto' 
                 name='product' 
-                reference='Commercial Name'
+                reference='Nombre Comercial'
             />
             <InputSearchList 
                 list={ingredientsList} 
-                inputLabel='Ingredient' 
+                inputLabel='Ingrediente' 
                 name='ingredient' 
-                reference='Active Ingredient'
+                reference='Ingrediente Activo'
             />
             
             {/*
@@ -90,38 +90,38 @@ const ApplicationProduct = ({ setProducts, input, setInput }) => {
             <FormInput 
                 type='number'
                 name='dose'
-                label='Dose'
+                label='Dosis'
                 step='any'
-                placeholder='Dose per hectar'
+                placeholder='Dosis per hectar'
                 value={application.dose}
                 onChange={handleChange}
             /> 
             <FormInput 
                 type='number'
                 name='volume'
-                label='Water Volume'
+                label='Volumen de Agua'
                 step='any'
-                placeholder='Water Volume per hectar'
+                placeholder='Agua por hectarea'
                 value={application.volume}
                 onChange={handleChange}
             />                     
             <FormInput 
                 type='number'
                 name='interval'
-                label='Interval'
-                placeholder='Safety Interval'
+                label='Intervalo'
+                placeholder='Intervalo de Seguridad'
                 value={application.interval}
                 onChange={handleChange}
             /> 
             <FormInput 
                 type='number'
                 name='reentry'
-                label='Re-entry Period'
-                placeholder='Safety Time for worker to can entry'
+                label='Periodo de Re-entrada'
+                placeholder='Tiempo de seguridad'
                 value={application.reentry}
                 onChange={handleChange}
             /> 
-            <div className='button-div' onClick={() => addProduct()}>Set Product</div>
+            <div className='button-div' onClick={() => addProduct()}>Agregar Producto</div>
             {/*<CustomButton onClick={() => addProduct()}>Set Product</CustomButton>*/}
         </div>
     )

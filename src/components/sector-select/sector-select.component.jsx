@@ -17,13 +17,13 @@ const SectorSelect = ({ allSectors }) => {
                     <span>Sector</span>
                 </div>
                 <div className='header-block'>
-                    <span>Variety</span>
+                    <span>Variedad</span>
                 </div>
                 <div className='header-block'>
-                    <span>Hectars</span>
+                    <span>Hectareas</span>
                 </div>
                 <div className='header-block'>
-                    <span>Planting Date</span>
+                    <span>Plantacion</span>
                 </div>               
             </div>            
             {

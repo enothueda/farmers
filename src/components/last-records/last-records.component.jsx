@@ -9,7 +9,7 @@ const LastRecords = ({ records, titlea, titleb }) => {
             <h3>Last Records</h3>            
             <div className='records-header'>
                 <div className='record-block'>
-                    <span>Date</span>
+                    <span>Fecha</span>
                 </div>
                 <div className='record-block'>
                     <span>{titlea}</span>

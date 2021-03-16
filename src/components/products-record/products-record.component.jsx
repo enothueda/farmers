@@ -9,19 +9,19 @@ const ProductsRecord = ({ products }) => {
         <div className='products-record'>
             <div className='records-header'>
                 <div className='record-block'>
-                    <span>Product</span>
+                    <span>Producto</span>
                 </div>
                 <div className='record-block'>
-                    <span>Ingredient</span>
+                    <span>Ingrediente</span>
                 </div>	
                 <div className='record-block'>
-                    <span>Dose</span>
+                    <span>Dosis</span>
                 </div>
                 <div className='record-block'>
-                    <span>Water Volume</span>
+                    <span>Volumen</span>
                 </div>
                 <div className='record-block'>
-                    <span>Remove</span>
+                    <span>Borrar</span>
                 </div>
             </div>
             {	products 

@@ -14,13 +14,13 @@ const RanchSelect = ({ allRanches }) => {
         <h3>Ranch Select</h3>
         <div className='select-header'>
             <div className='header-block'>
-                <span>Ranch ID</span>
+                <span>ID</span>
             </div>
             <div className='header-block'>
-                <span>Ranch Name</span>
+                <span>Nombre</span>
             </div>
             <div className='header-block'>
-                <span>Crop</span>
+                <span>Cultivo</span>
             </div>
         </div>        
         {

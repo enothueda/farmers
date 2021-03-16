@@ -83,14 +83,14 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
     
     return (
         <div className='application-record'>
-            <h2>Record your Application</h2>
+            <h2>Registro de Aplicacion</h2>
             <form onSubmit={handleSubmit}>
                 <MultiSector />
-                <h3>Application Info</h3>
+                <h3>Datos de Aplicacion</h3>
                 <FormInput 
                     type='date'
                     name='date'
-                    label='Date'
+                    label='Fecha'
                     value={application.date}
                     onChange={handleChange}
                     required
@@ -98,7 +98,7 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
                 <FormInput 
                     type='time'
                     name='startTime'
-                    label='Start Time'
+                    label='Hora inicial'
                     value={application.startTime}
                     onChange={handleChange}
                     required
@@ -106,28 +106,28 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
                 <FormInput 
                     type='time'
                     name='endTime'
-                    label='End Time'
+                    label='Hora termino'
                     value={application.endTime}
                     onChange={handleChange}
                     required
                 />
                 <InputSearchList 
                     list={applicationOptions} 
-                    inputLabel='Application' 
+                    inputLabel='Metodo' 
                     name='method' 
-                    reference='Foliar, Irrigation, Drench, other'
+                    reference='Foliar, Riego, Drench, etc'
                 />
                 <InputSearchList 
                     list={equipmentOptions} 
-                    inputLabel='Equipment' 
+                    inputLabel='Equipo' 
                     name='equipment' 
-                    reference='Pump, Sprinkles, etc'
+                    reference='Bomba, Aspersores, etc'
                 />                
                 <InputSearchList 
                     list={options} 
-                    inputLabel='Pest or Disease' 
+                    inputLabel='Motivo' 
                     name='reason' 
-                    reference='Reason of the application'
+                    reference='Plaga o Enfermedad'
                 />                
                 <ApplicationProduct />
                 {/*
@@ -217,7 +217,7 @@ const ApplicationRecord = ({ ranch, sectors, currentUser, addApplication, clearS
                     */
                 }
                 <br />
-                <CustomButton type='submit'>Record Application</CustomButton>
+                <CustomButton type='submit'>Registrar Aplicacion</CustomButton>
             </form>
         </div>
     )
