@@ -44,8 +44,6 @@ class Inventory extends React.Component {
                     : null
                 }           
                     
-                    
-
                     <ProductWithForm  title='Add a Product' />
 
                     <WarehouseWithForm title='Add a Warehouse'/>
