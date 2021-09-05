@@ -6,6 +6,7 @@ import AddNewProduct from '../../components/add-new-product/add-product.componen
 import InventoryManagement from '../../components/inventory-mgmt/inventory-mgmt.component';
 import InventoryDetails from '../../components/inventory-details/inventory-details.component';
 import WithForm from '../../components/with-form/with-form.component';
+import CustomButton from '../../components/custom-button/custom-button.component';
 
 import { selectCurrentCompany } from '../../redux/company/company.selectors';
 import { setWarehouses,setProducts } from '../../redux/inventory/inventory.actions';
@@ -33,20 +34,34 @@ class Inventory extends React.Component {
         return (
             <div className='inventory'>
                 <h1>Inventory</h1>
+                <h2>Setup</h2>
+                <WarehouseWithForm title='Add a Warehouse'/>
+                
+                <ProductWithForm  title='Add a Product' />
 
-                <h3>Inventory Management</h3>
-                <InventoryManagement />
+                <h2>Warehouses</h2>
 
-                <h2>Warehouse Inventory</h2>
                 {
-                    warehouses
-                    ? warehouses.map(shed => <InventoryDetails key={shed.id} shed={shed}/>)
+                    warehouses 
+                    ? warehouses.map(wh => <CustomButton key={wh.id}>{wh.warehouse}</CustomButton>)
                     : null
-                }           
-                    
-                    <ProductWithForm  title='Add a Product' />
+                }
 
-                    <WarehouseWithForm title='Add a Warehouse'/>
+                {
+                    /* This is for add or remove a product inventory (to be changed)  
+                    <h3>Inventory Management</h3>
+                    <InventoryManagement />
+
+                    This part, should be moved into the warehouse options (Summary)
+                    <h2>Warehouse Inventory</h2>
+                    {
+                        warehouses
+                        ? warehouses.map(shed => <InventoryDetails key={shed.id} shed={shed}/>)
+                        : null
+                    }           
+                    */
+                }
+                    
             </div>
         );
     }

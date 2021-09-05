@@ -108,10 +108,10 @@ class App extends React.Component {
             <Route exact path='/user' component={UserPage} />
             <Route exact path='/ranchs' component={Ranchs} />
             <Route exact path='/maps' component={Maps} />
-            <Route exact path='/inspections' component={Inspections} />
+            <Route path='/inspections' component={Inspections} />
             <Route exact path='/applications' component={Applications} />
             <Route exact path='/harvest' component={Harvest} />
-            <Route exact path='/inventory' component={Inventory} />
+            <Route path='/inventory' component={Inventory} />
             <Route 
               path='/signin' 
               render={ () =>
